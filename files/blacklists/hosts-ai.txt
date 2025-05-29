@@ -45,3 +45,11 @@
 0.0.0.0 anthropic.com
 0.0.0.0 cohere.ai
 0.0.0.0 mistral.ai
+0.0.0.0 x.ai
+0.0.0.0 grok.x.ai
+0.0.0.0 jan.ai
+0.0.0.0 openassistant.io
+0.0.0.0 ora.ai
+0.0.0.0 pi.ai
+0.0.0.0 nat.dev
+0.0.0.0 superus.ai
