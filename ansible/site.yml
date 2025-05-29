@@ -1,0 +1,44 @@
+---
+- name: Update & upgrade system
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+
+    - name: Autoclean unneeded packages
+      apt:
+        autoclean: yes
+
+- name: Set locale to en_US.UTF-8
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Install locales
+      apt:
+        name: locales
+        state: present
+
+    - name: Ensure en_US.UTF-8 is uncommented in locale.gen
+      lineinfile:
+        path: /etc/locale.gen
+        regexp: '^#? *en_US.UTF-8'
+        line: 'en_US.UTF-8 UTF-8'
+
+    - name: Generate locale
+      shell: locale-gen
+
+    - name: Set default locale
+      copy:
+        dest: /etc/default/locale
+        content: |
+          LANG=en_US.UTF-8
+          LC_ALL=en_US.UTF-8
+
+    - name: Apply locale settings (for current session)
+      ansible.builtin.shell: . /etc/default/locale

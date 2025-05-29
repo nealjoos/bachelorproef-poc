@@ -1,0 +1,7 @@
+---
+files:
+  - { src: "/vagrant/files/pfsense/config/latest.xml", dest: "/cf/conf/config.xml", mode: "0600" }
+  - { src: "/vagrant/files/ntopng/blacklists/ai.list", dest: "/usr/local/share/ntopng/httpdocs/misc/lists/custom/ai.list", mode: "0644" }
+  - { src: "/vagrant/files/ntopng/blacklists/chat.list", dest: "/usr/local/share/ntopng/httpdocs/misc/lists/custom/chat.list", mode: "0644" }
+  - { src: "/vagrant/files/ntopng/blacklists/drive.list", dest: "/usr/local/share/ntopng/httpdocs/misc/lists/custom/drive.list", mode: "0644" }
+  - { src: "/vagrant/files/ntopng/blacklists/misc.list", dest: "/usr/local/share/ntopng/httpdocs/misc/lists/custom/misc.list", mode: "0644" }

@@ -1,0 +1,29 @@
+---
+servers:
+  vars:
+    ansible_user: vagrant
+    ansible_become: true
+  hosts:
+    docker:
+      ansible_host: 192.168.56.10
+      ansible_ssh_private_key_file: /vagrant/.vagrant/machines/docker/virtualbox/private_key
+
+routers:
+  hosts:
+    pfsense_preconfig:
+      ansible_host: 192.168.56.78
+      ansible_ssh_user: vagrant
+      ansible_ssh_private_key_file: /vagrant/.vagrant/machines/pfsense/virtualbox/private_key
+    pfsense_postconfig:
+      ansible_host: 192.168.56.254
+      ansible_ssh_user: ansible
+      ansible_ssh_private_key_file: /vagrant/files/pfsense/id_rsa
+
+clients:
+  vars:
+    ansible_user: vagrant
+    ansible_ssh_pass: vagrant
+    ansible_become: true
+  hosts:
+    student:
+      ansible_host: 192.168.60.2

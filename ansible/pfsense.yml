@@ -1,0 +1,26 @@
+---
+- name: pfSense configuration
+  hosts: routers
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Check if ntopng is already installed
+      shell: pkg info ntopng
+      register: ntopng_check
+      failed_when: false
+      changed_when: false
+
+    - name: Install ntopng if not present
+      shell: pkg install -y ntopng
+      when: "'ntopng' not in ntopng_check.stdout"
+
+    - name: Copy files to pfSense
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+      with_items: "{{ files }}"
+
+    - name: Halt pfSense
+      shell: /sbin/shutdown -p now
+      ignore_errors: true

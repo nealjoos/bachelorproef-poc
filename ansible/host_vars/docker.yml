@@ -1,0 +1,10 @@
+---
+adguard_container_name: adguardhome
+adguard_image: adguard/adguardhome:latest
+adguard_config_dir: /opt/adguardhome/config
+adguard_work_dir: /opt/adguardhome/work
+adguard_ports:
+  - "53:53/udp"
+  - "80:80"
+  - "443:443"
+  - "3000:3000"  # Web UI for first-time config

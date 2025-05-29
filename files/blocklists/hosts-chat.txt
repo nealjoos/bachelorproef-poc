@@ -1,0 +1,57 @@
+! === Meta & Big Tech Chat ===
+0.0.0.0 messenger.com
+0.0.0.0 web.whatsapp.com
+0.0.0.0 whatsapp.com
+0.0.0.0 facebook.com
+0.0.0.0 hangouts.google.com
+0.0.0.0 chat.google.com
+0.0.0.0 messages.google.com
+0.0.0.0 imessage.apple.com
+0.0.0.0 facetime.apple.com
+
+! === Cross-Platform Chat Apps ===
+0.0.0.0 telegram.org
+0.0.0.0 web.telegram.org
+0.0.0.0 signal.org
+0.0.0.0 signal.org
+0.0.0.0 viber.com
+0.0.0.0 line.me
+0.0.0.0 kakaocorp.com
+0.0.0.0 kakaotalk.com
+0.0.0.0 snapchat.com
+0.0.0.0 discord.com
+0.0.0.0 discordapp.com
+
+! === Business Chat Tools ===
+0.0.0.0 slack.com
+0.0.0.0 teams.microsoft.com
+0.0.0.0 mattermost.com
+0.0.0.0 zoho.com
+0.0.0.0 rocket.chat
+0.0.0.0 webex.com
+0.0.0.0 chatwork.com
+0.0.0.0 fleep.io
+
+! === Gaming & Niche Chat ===
+0.0.0.0 steamcommunity.com
+0.0.0.0 roblox.com
+0.0.0.0 twitch.tv
+0.0.0.0 guilded.gg
+
+! === Open Source & Decentralized Chat ===
+0.0.0.0 matrix.org
+0.0.0.0 element.io
+0.0.0.0 riot.im
+0.0.0.0 delta.chat
+0.0.0.0 wire.com
+0.0.0.0 tox.chat
+0.0.0.0 threema.ch
+
+! === Dating Apps with Chat (Optional Block) ===
+0.0.0.0 tinder.com
+0.0.0.0 bumble.com
+0.0.0.0 okcupid.com
+0.0.0.0 hinge.co
+0.0.0.0 plentyoffish.com
+0.0.0.0 coffeemeetsbagel.com
+0.0.0.0 match.com

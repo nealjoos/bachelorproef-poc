@@ -1,0 +1,6 @@
+! === Domain names with chat, ai or mail in it ===
+||*chat*^
+||ai.$domain=~akamaiedge.net
+||*.ai^
+||ai.*
+||*mail*^
