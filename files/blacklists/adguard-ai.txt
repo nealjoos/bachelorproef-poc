@@ -45,3 +45,11 @@
 ||anthropic.com^
 ||cohere.ai^
 ||mistral.ai^
+||x.ai^
+||grok.x.ai^
+||jan.ai^
+||openassistant.io^
+||ora.ai^
+||pi.ai^
+||nat.dev^
+||superus.ai^
