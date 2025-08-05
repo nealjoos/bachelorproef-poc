@@ -1,4 +1,5 @@
 ---
+# Adguard variables
 adguard_container_name: adguardhome
 adguard_image: adguard/adguardhome:latest
 adguard_config_dir: /opt/adguardhome/config
@@ -8,3 +9,12 @@ adguard_ports:
   - "80:80"
   - "443:443"
   - "3000:3000"  # Web UI for first-time config
+
+# Loki variables
+loki_dir: /opt/loki
+loki_image: grafana/loki:3.4.1
+promtail_image: grafana/promtail:3.4.1
+loki_config_file: loki-config.yaml
+promtail_config_file: promtail-config.yaml
+loki_container_name: loki
+promtail_container_name: promtail
