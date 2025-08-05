@@ -37,30 +37,6 @@ def windows_host?
   Vagrant::Util::Platform.windows?
 end
 
-# Set options for the network interface configuration. All values are
-# optional, and can include:
-# - ip (default = DHCP)
-# - netmask (default value = 255.255.255.0
-# - mac
-# - auto_config (if false, Vagrant will not configure this network interface
-# - intnet (if true, an internal network adapter will be created instead of a
-#   host-only adapter)
-def network_options(host)
-  options = {}
-
-  if host.key?('ip')
-    options[:ip] = host['ip']
-    options[:netmask] = host['netmask'] ||= '255.255.255.0'
-  else
-    options[:type] = 'dhcp'
-  end
-
-  options[:mac] = host['mac'].gsub(/[-:]/, '') if host.key?('mac')
-  options[:auto_config] = host['auto_config'] if host.key?('auto_config')
-  options[:virtualbox__intnet] = true if host.key?('intnet') && host['intnet']
-  options
-end
-
 def custom_synced_folders(vm, host)
   return unless host.key?('synced_folders')
   folders = host['synced_folders']
@@ -95,7 +71,35 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       node.vm.box_url = host['box_url'] if host.key? 'box_url'
 
       node.vm.hostname = host['name']
-      node.vm.network :private_network, **network_options(host)
+
+      if host.key?('networks')
+        host['networks'].each do |net|
+          type = net['type'].to_sym
+
+          options = net.each_with_object({}) do |(k, v), memo|
+            memo[k.to_sym] = v unless k == 'type'
+          end
+
+          if type == :private_network
+            if !options.key?(:ip)
+              # DHCP
+              node.vm.network type, type: 'dhcp'
+              next
+            else
+              # Static IP
+              options[:netmask] ||= '255.255.255.0'
+            end
+          end
+
+          node.vm.network type, **options
+        end
+      end
+
+      # Disable default Vagrant synced folder if specified
+      if host['disable_default_vagrant']
+        node.vm.synced_folder '.', '/vagrant', disabled: true
+      end
+
       custom_synced_folders(node.vm, host)
       forwarded_ports(node.vm, host) 
 
