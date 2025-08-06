@@ -757,7 +757,7 @@
 		<category>left=system-processor&amp;right=&amp;resolution=300&amp;timePeriod=-1d&amp;startDate=&amp;endDate=&amp;startTime=0&amp;endTime=0&amp;graphtype=line&amp;invert=true&amp;refresh-interval=0</category>
 	</rrd>
 	<widgets>
-		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show,pfblockerng:col2:open:0</sequence>
+		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show</sequence>
 		<period>10</period>
 	</widgets>
 	<openvpn></openvpn>
@@ -786,9 +786,9 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1754496550</time>
-		<description><![CDATA[(system): pfBlockerNG: saving DNSBL changes]]></description>
-		<username><![CDATA[(system)]]></username>
+		<time>1748002757</time>
+		<description><![CDATA[admin@192.168.56.1 (Local Database): Interfaces assignment settings changed]]></description>
+		<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 	</revision>
 	<gateways></gateways>
 	<captiveportal>
@@ -875,27 +875,6 @@
 			</tabs>
 			<include_file>/usr/local/pkg/ntopng.inc</include_file>
 		</package>
-		<package>
-			<name>pfBlockerNG-devel</name>
-			<descr><![CDATA[pfBlockerNG-devel is the Next Generation of pfBlockerNG.&lt;br /&gt;
-			Manage IPv4/v6 List Sources into &#039;Deny, Permit or Match&#039; formats.&lt;br /&gt;
-			GeoIP database by MaxMind Inc. (GeoLite2 Free version).&lt;br /&gt;
-			De-Duplication, Suppression, and Reputation enhancements.&lt;br /&gt;
-			Provision to download from diverse List formats.&lt;br /&gt;
-			Advanced Integration for Proofpoint ET IQRisk IP Reputation Threat Sources.&lt;br /&gt;
-			Domain Name (DNSBL) blocking via Unbound DNS Resolver.]]></descr>
-			<pkginfolink>https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html</pkginfolink>
-			<version>3.2.0_7</version>
-			<configurationfile>pfblockerng.xml</configurationfile>
-			<include_file>/usr/local/pkg/pfblockerng/pfblockerng.inc</include_file>
-		</package>
-		<package>
-			<name>Telegraf</name>
-			<descr><![CDATA[Telegraf is an agent written in Go for collecting, processing, aggregating, and writing metrics.]]></descr>
-			<version>0.9_6</version>
-			<configurationfile>telegraf.xml</configurationfile>
-			<include_file>/usr/local/pkg/telegraf.inc</include_file>
-		</package>
 		<ntopng>
 			<config>
 				<enable>on</enable>
@@ -924,69 +903,29 @@
 			<section>Diagnostics</section>
 			<url>/ntopng_redirect.php</url>
 		</menu>
-		<menu>
-			<name>pfBlockerNG</name>
-			<section>Firewall</section>
-			<url>/pfblockerng/pfblockerng_general.php</url>
-		</menu>
-		<menu>
-			<name>Telegraf</name>
-			<section>Services</section>
-			<configfile>telegraf.xml</configfile>
-			<url>/pkg_edit.php?xml=telegraf.xml</url>
-		</menu>
 		<service>
 			<name>ntopng</name>
 			<rcfile>ntopng.sh</rcfile>
 			<executable>ntopng</executable>
 			<description><![CDATA[ntopng Network Traffic Monitor]]></description>
 		</service>
-		<service>
-			<name>pfb_dnsbl</name>
-			<rcfile>pfb_dnsbl.sh</rcfile>
-			<executable>lighttpd_pfb</executable>
-			<description><![CDATA[pfBlockerNG DNSBL service]]></description>
-		</service>
-		<service>
-			<name>pfb_filter</name>
-			<rcfile>pfb_filter.sh</rcfile>
-			<executable>php_pfb</executable>
-			<description><![CDATA[pfBlockerNG firewall filter service]]></description>
-		</service>
-		<service>
-			<name>telegraf</name>
-			<rcfile>telegraf.sh</rcfile>
-			<executable>telegraf</executable>
-			<description><![CDATA[Telegraf daemon]]></description>
-		</service>
-		<pfblockerng></pfblockerng>
-		<pfblockerngipsettings></pfblockerngipsettings>
-		<pfblockerngdnsblsettings></pfblockerngdnsblsettings>
-		<pfblockerngblacklist></pfblockerngblacklist>
-		<pfblockerngglobal></pfblockerngglobal>
-		<pfblockerngsafesearch></pfblockerngsafesearch>
 	</installedpackages>
-	<virtualip>
-	</virtualip>
-	<dhcrelay></dhcrelay>
-	<dhcrelay6></dhcrelay6>
-	<sysctl></sysctl>
 	<sshdata>
 		<sshkeyfile>
 			<filename>ssh_host_rsa_key</filename>
-			<xmldata>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</xmldata>
+			<xmldata>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</xmldata>
 		</sshkeyfile>
 		<sshkeyfile>
 			<filename>ssh_host_rsa_key.pub</filename>
-			<xmldata>FcfJsqIwAEDRfX/F21vdTAFh8aqaUQVkEAzBHVMCyKRoBL6+X9/NqTvP9e/nnH2pP2mCt2U6txa8+X8NNVS1H3U1NIwqs3FCry7UqmE8Qvh2rwq/tRPdnfz9h9RoGKuH+SYNLHc80Pxn5Vby1lj4SGtHdIUqIXl3OCiRzq/nOGkQCV8wurKD0/HaDICtchDt96seSd0b2ODeLsO2xHGcgyDazcWCOKGpTzCZ3NBFq5k8wleqXMJFdUjovxq2N4zFKrHygXc/76iJrSaohlKrOCh6aFguKJEWeUA86UWB56JMwaJdNyg+aHbx2c4wjWBxKUZXLB41VlzKgE5uNRSsDGLqZ6/P7p1Lk/ikZltyo+cMPBcLQGkNPUfOBIOLGEx4XyQPdFWKUSDcNNe8Bg/6PWcZFNx7tQ+IIVu3KblYsM+2NU0ZEGbopjL1dMY8Cw9hNLvWfmk0sNX5TbY43mGOsd44t8EwaYZR1VbMkHsz4BcpfMCyHI0ciFohMpWGfCMqPzHL5tuZI0zYwc3Ydlw7S1dl9AorAS4B2ZTl/OFq3zs29aFnbQ65Ec7xJUQ7ARv2JcZ6n439eSI83dE3T44mPqYC3bx3oAaX1Be81ye8W8rH1FFqbWaXPaSHqbLtSLmba5qn03PwaRvrx117Xy+jP+PQrhpXEwt5Bjt3wpTuOq4Y9FePIuGJx0XVBgYpwBQ2Pjc3Kaz0PbeSxHFL5sXI+yChNvSDo+dILWvgqfbH2wedAhGYlqyW6DKgE13LKRBDcR9+f389x/H1d8JRNczVn24ssq4c+6wZfv0D</xmldata>
+			<xmldata>FcdHkptAAEDRvU8xe8oGRJIWU+UWOYOEELBrRJMRoUni9B7/zauPcfl7wvAL/HRlnAOK9Od1kv+vBHxw/VEEvqQUjkOINs5jw2YXnBHafVMoLpzMwtjOarJlXn591rUeX6bVGXLJRXFLPOiQ09/u4zqWfu5qvNjXGXeki1zou3kXqkxrT1ytAfmhg6whwWv0uyXMumD0CeuudlUUlVoA+jiljUpb+2RKecOfY8ysd6GVSHs6sStTXvHrXLDaHsUfXh5zaM/aQR/lVial+3K99wIidy6U04m0PU6vFHZ+Q0IW8xxbPL+eh4HqOwrd97Z2yNcEdiHhFtMIWfEVHYNVlGcIkp0Jc19/UMoiDUUNM1awcJEQt+Zsa5QeiuvaM1Y+fFQxRjsuH/VYZyGGqAd55b5krtJo6p5WUo9jatgdECbPaLuBz6L07Y3TocBGQi69hWVMU1RKIOS3JEoky7A1eOwibErB9NFyZtHE81i5NgkpxmSWDDtBSaoEQ+TlFB/4MwpYS+fmw4kC32E6wTmqRkhVkT3dLV6x2qps7W4dx8JAHyVlD8kQp8dyYWMStF0hBHuvzTeJXWrlNPpve9JJXz+r+gmTtTHJm03UN9YqrUiG/QFWdegdgl6yC40nmsnQiwzNoMPH+my8PcyYpzsZbg07koOk6APNzdd33cQTcxMpphU5spOkFHlZChNSIEx29JzjyjWpOcqx13PMxvK3Gs1tFXwi9dFfLcPQnItqi2Znmu8lXotG4m+8rBFbhQL6zC3b9/fX1Pfz3yG/ozdGf8q+Q3/gNMBf/wA=</xmldata>
 		</sshkeyfile>
 		<sshkeyfile>
 			<filename>ssh_host_ed25519_key</filename>
-			<xmldata>nZBLb4JAFIX3/Ar3jYmAVFnOwDi8RGB4zs6RgjriAxGFX99OkybddNOzOLnJuflycqbTL0GEbX+yCZBPiDUJIjsFMZq4qBDhVGIqPLGzP24NuaU578ojAkIQaz1rEnEi1ugPGoIfQWHrp/Bu3Cl1RzMpHPw4eW3Ek2GA6jZqrtnQEjoukLH9SAOP5Idhob9U+Z3XelW6dsoAFgwXkDPpSnSdtVIe/qb+FyqJ0ia1VnPltcbq9tGxOLOKAd6eg35c88VIqNoovODWvj2T5Ry+tQG/bOhphvjFTIqDliw7R/rwvF61qvxGTFmfXfbpHRSiH7acnqkR2GEa00wbKdHuTPH3DEc9y1ZXViMDPMOV9D0x8s2/5/8E</xmldata>
+			<xmldata>nZBNj4IwGITv/Arvxhj5UDy2UAoIRQro2puFtSsfuioi8uvXbrLJXvayz2HyJu9kMpnJ5AVE2COjaI1IkrijNfU2IEWjFdrJ50ThGqz5iQx7a3Zlb1VblAhIIDY63mTyRLxZ3lkMfoBSwofUdshV0bKtEj9JmvWRNFmQCH0BP/y00lxD+yyB2R9sN/OiiuEpVY9zM27GiPln3IqXfwVcjh93qPY3JRC/U/8bqsjSFi2Do+fcC6KVte7zsUnn0yW+LEixzdJuFq80/UIQPGy6SrXLG0Z1lOaH03sT2oNjhkWsiDmt+NLdB9fe4jqtGrFXZT/n5HdcoyDHLGVbY2CJcebqrA4a55ljBIEIEYx3rvI9MSL23/N/AQ==</xmldata>
 		</sshkeyfile>
 		<sshkeyfile>
 			<filename>ssh_host_ed25519_key.pub</filename>
-			<xmldata>Ky7O0E1NMTI1NbRUcAQCZ2O/qkRnw5woF09DvxBXU5CYp6eTdlFAdr5/VI6Ba3a+S2hkpmmoRYlXqo9PmbFHWkRhsIuhpUF+RlixY6RCUX5+iUNBWnBqXnGqXk5+cmJOSn5uYmYeFwA=</xmldata>
+			<xmldata>Ky7O0E1NMTI1NbRUcAQCZ2O/qkRnw5woF09DvxBXU5CYp6uRS1axu2uOf0hyWl5qrq9LlZuFb0pgullQdpKlR6JPUYVzkklQdm56opFCUX5+iUNBWnBqXnGqXkZ+bqpeYlFBIhcA</xmldata>
 		</sshkeyfile>
 	</sshdata>
 </pfsense>

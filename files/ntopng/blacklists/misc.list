@@ -1,1 +1,1 @@
-{"name":"Miscellaneous","format":"hosts","enabled":true,"update_interval":86400,"url":"https://dev.joos-it.be/bp/blocklists/hosts-misc.txt","category":"malware"}
+{"name":"Miscellaneous","format":"hosts","enabled":true,"update_interval":86400,"url":"https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-misc.txt","category":"malware"}
