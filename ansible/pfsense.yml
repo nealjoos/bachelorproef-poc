@@ -11,7 +11,7 @@
       changed_when: false
 
     - name: Install ntopng if not present
-      shell: pkg install -y ntopng
+      shell: pkg install -y pfSense-pkg-ntopng
       when: "'ntopng' not in ntopng_check.stdout"
 
     - name: Copy files to pfSense
@@ -21,6 +21,11 @@
         mode: "{{ item.mode }}"
       with_items: "{{ files }}"
 
-    - name: Halt pfSense
-      shell: /sbin/shutdown -p now
+    - name: Reboot pfSense
+      shell: /sbin/reboot
+      async: 1
+      poll: 0
       ignore_errors: true
+
+    - name: End play gracefully after reboot
+      meta: end_play

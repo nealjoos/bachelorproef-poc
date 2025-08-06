@@ -41,14 +41,15 @@ dnf install --assumeyes \
 
 dnf install --assumeyes \
     python3-pip \
-    sshpass
+    sshpass \
+    nc
 
 python3 -m pip install --user ansible
 
 # Scan for SSH keys
 log "Scanning remote hosts"
 
-hosts=(192.168.56.10 192.168.56.78 192.168.56.254)
+hosts=(192.168.56.10 192.168.56.254)
 
 for host in "${hosts[@]}"; do
     if ping -c 1 -W 1 "$host" &>/dev/null; then
@@ -65,6 +66,23 @@ done
 
 log "Running Ansible playbooks"
 # ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/site.yml"
+# Wait for pfSense SSH port to be open
+log "Waiting for pfSense SSH (192.168.56.254:22) to be available..."
+
+for i in {1..30}; do
+  if nc -z -w 1 192.168.56.254 22; then
+    log "pfSense SSH is available."
+    break
+  else
+    log "pfSense SSH not available yet, retrying... ($i)"
+    sleep 5
+  fi
+
+  if [[ $i -eq 30 ]]; then
+    log "Timeout waiting for pfSense SSH. Exiting..."
+    exit 1
+  fi
+done
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/pfsense.yml"
 
