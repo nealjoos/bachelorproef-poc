@@ -2,10 +2,15 @@
 - name: Deploy Loki and Promtail using Docker
   hosts: docker
   become: yes
-  vars:
-
 
   tasks:
+    - name: Ensure Python Docker SDK is installed (only if not done in docker-install)
+      pip:
+        name:
+          - docker
+          - requests
+        executable: pip3
+
     - name: Ensure loki directory exists
       file:
         path: "{{ loki_dir }}"

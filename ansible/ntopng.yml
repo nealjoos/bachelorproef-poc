@@ -1,0 +1,94 @@
+---
+- name: Deploy ntopng
+  hosts: ntopng
+  become: yes
+  tasks:
+    - name: Download ntopng repo file
+      ansible.builtin.get_url:
+        url: https://packages.ntop.org/centos-stable/ntop.repo
+        dest: /etc/yum.repos.d/ntop.repo
+        mode: '0644'
+
+    - name: Enable crb repo
+      ansible.builtin.command:
+        cmd: dnf config-manager --set-enabled crb
+      changed_when: false
+
+    - name: Install epel-release
+      ansible.builtin.dnf:
+        name: epel-release
+        state: present
+
+    - name: Clean all yum caches
+      ansible.builtin.command:
+        cmd: yum clean all
+      changed_when: false
+
+    - name: Update all packages
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+      register: update_result
+
+    - name: Install ntopng packages
+      ansible.builtin.dnf:
+        name:
+          - ntopng
+        state: present
+      register: install_ntopng
+
+    - name: Clean all yum caches again
+      ansible.builtin.command:
+        cmd: yum clean all
+      changed_when: false
+
+    - name: Final update after ntopng installation
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+      when: install_ntopng.changed or update_result.changed
+
+    - name: Ensure --community is present in ntopng.conf
+      ansible.builtin.lineinfile:
+        path: /etc/ntopng/ntopng.conf
+        line: --community
+        state: present
+        create: yes
+
+    - name: Ensure syslog device is present in ntopng.conf
+      ansible.builtin.lineinfile:
+        path: /etc/ntopng/ntopng.conf
+        line: -i=syslog://*:5140
+        state: present
+        create: yes
+
+    - name: Ensure eth1 interface is present in ntopng.conf
+      ansible.builtin.lineinfile:
+        path: /etc/ntopng/ntopng.conf
+        line: -i=eth1
+        state: present
+        create: yes
+
+    - name: Remove all files in /usr/share/ntopng/httpdocs/misc/lists/builtin/
+      ansible.builtin.file:
+        path: /usr/share/ntopng/httpdocs/misc/lists/builtin/
+        state: absent
+
+    - name: Recreate builtin directory
+      ansible.builtin.file:
+        path: /usr/share/ntopng/httpdocs/misc/lists/builtin/
+        state: directory
+        mode: '0755'
+
+    - name: Copy files to pfSense
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+      with_items: "{{ files }}"
+
+    - name: Ensure ntopng is started and enabled
+      ansible.builtin.service:
+        name: ntopng
+        state: started
+        enabled: yes

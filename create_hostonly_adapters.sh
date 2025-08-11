@@ -5,6 +5,7 @@ set -e
 # Define network configurations
 declare -A networks
 networks["192.168.56.1"]="192.168.56.0 255.255.255.0"
+networks["192.168.57.1"]="192.168.57.0 255.255.255.0"
 networks["192.168.60.1"]="192.168.60.0 255.255.254.0"
 
 # Function to delete conflicting adapters

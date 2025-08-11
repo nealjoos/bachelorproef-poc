@@ -81,8 +81,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
 
           if type == :private_network
-            if !options.key?(:ip)
-              # DHCP
+            if options[:ip] == '0.0.0.0'
+              # Don't assign IP — relying on external DHCP
+              # Just pass the options along
+            elsif !options.key?(:ip)
+              # Default to DHCP (if no IP at all is provided)
               node.vm.network type, type: 'dhcp'
               next
             else
@@ -92,6 +95,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
 
           node.vm.network type, **options
+
         end
       end
 

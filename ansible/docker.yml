@@ -1,14 +1,20 @@
 ---
-- name: Install Docker
+- name: Install Docker on AlmaLinux / RHEL
   hosts: docker
   become: yes
   tasks:
-    - name: Add signing key
+    - name: Remove podman-docker to avoid conflict with Docker
+      ansible.builtin.dnf:
+        name: podman-docker
+        state: absent
+        autoremove: true
+
+    - name: Add Docker GPG key
       ansible.builtin.rpm_key:
         key: "https://download.docker.com/linux/rhel/gpg"
         state: present
 
-    - name: Add repository into repo.d list
+    - name: Add Docker repository
       ansible.builtin.yum_repository:
         name: Docker
         description: Docker repository
@@ -17,7 +23,7 @@
         gpgcheck: true
         gpgkey: "https://download.docker.com/linux/rhel/gpg"
 
-    - name: Install Docker
+    - name: Install Docker CE and related tools
       ansible.builtin.dnf:
         name:
           - docker-ce
@@ -25,11 +31,20 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+          - python3
+          - python3-pip
         state: latest
         update_cache: true
 
-    - name: Start Docker
+    - name: Start and enable Docker service
       ansible.builtin.service:
         name: docker
         enabled: true
         state: started
+
+    - name: Install Python Docker SDK (for Ansible)
+      ansible.builtin.pip:
+        name:
+          - docker
+          - requests
+        executable: pip3

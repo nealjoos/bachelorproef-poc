@@ -49,7 +49,7 @@ python3 -m pip install --user ansible
 # Scan for SSH keys
 log "Scanning remote hosts"
 
-hosts=(192.168.56.10 192.168.56.254)
+hosts=(192.168.56.10 192.168.56.11 192.168.56.254)
 
 for host in "${hosts[@]}"; do
     if ping -c 1 -W 1 "$host" &>/dev/null; then
@@ -79,6 +79,11 @@ for i in {1..30}; do
   fi
 
   if [[ $i -eq 30 ]]; then
+
+
+
+
+
     log "Timeout waiting for pfSense SSH. Exiting..."
     exit 1
   fi
@@ -86,5 +91,10 @@ done
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/pfsense.yml"
 
-ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
-ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/adguard.yml"
+ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/ntopng.yml"
+
+
+# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
+# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/loki.yml"
+
+# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/adguard.yml"
