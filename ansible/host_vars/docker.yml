@@ -1,4 +1,8 @@
 ---
+files:
+  - { src: "/vagrant/files/docker/loki/docker-compose.yml", dest: "/opt/loki", mode: "0644" }
+  - { src: "/vagrant/files/docker/loki/promtail-config.yml", dest: "/opt/loki", mode: "0644" }
+
 # Adguard variables
 adguard_container_name: adguardhome
 adguard_image: adguard/adguardhome:latest
@@ -12,9 +16,4 @@ adguard_ports:
 
 # Loki variables
 loki_dir: /opt/loki
-loki_image: grafana/loki:3.4.1
-promtail_image: grafana/promtail:3.4.1
-loki_config_file: loki-config.yaml
-promtail_config_file: promtail-config.yaml
-loki_container_name: loki
-promtail_container_name: promtail
+compose_file: docker-compose.yml

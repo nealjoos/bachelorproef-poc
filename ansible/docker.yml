@@ -1,5 +1,5 @@
 ---
-- name: Install Docker on AlmaLinux / RHEL
+- name: Install Docker
   hosts: docker
   become: yes
   tasks:
@@ -42,9 +42,10 @@
         enabled: true
         state: started
 
-    - name: Install Python Docker SDK (for Ansible)
+    - name: Install Python Docker package
       ansible.builtin.pip:
         name:
           - docker
-          - requests
+          # - docker-compose
         executable: pip3
+        state: latest

@@ -65,7 +65,10 @@ for host in "${hosts[@]}"; do
 done
 
 log "Running Ansible playbooks"
+
+ansible-galaxy collection install community.docker --upgrade
 # ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/site.yml"
+
 # Wait for pfSense SSH port to be open
 log "Waiting for pfSense SSH (192.168.56.254:22) to be available..."
 
@@ -87,7 +90,6 @@ done
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/pfsense.yml"
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/ntopng.yml"
-
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
 

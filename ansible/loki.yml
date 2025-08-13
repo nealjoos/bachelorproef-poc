@@ -1,56 +1,31 @@
 ---
-- name: Deploy Loki and Promtail using Docker
+- name: Deploy Loki, Promtail, and Grafana via Docker Compose
   hosts: docker
   become: yes
 
   tasks:
-    - name: Ensure Python Docker SDK is installed (only if not done in docker-install)
-      ansible.builtin.pip:
-        name:
-          - docker
-          - requests==2.31.0
-          - paramiko
-        state: latest
+    # - name: Ensure Python Docker SDK is installed
+    #   ansible.builtin.pip:
+    #     name:
+    #       - docker
+    #       - requests==2.31.0
+    #       - paramiko
+    #     state: latest
 
     - name: Ensure loki directory exists
-      file:
+      ansible.builtin.file:
         path: "{{ loki_dir }}"
         state: directory
         mode: "0755"
 
-    - name: Download Loki configuration
-      get_url:
-        url: https://raw.githubusercontent.com/grafana/loki/v3.4.1/cmd/loki/loki-local-config.yaml
-        dest: "{{ loki_dir }}/{{ loki_config_file }}"
-        mode: "0644"
+    - name: Copy files
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+      with_items: "{{ files }}"
 
-    - name: Download Promtail configuration
-      get_url:
-        url: https://raw.githubusercontent.com/grafana/loki/v3.4.1/clients/cmd/promtail/promtail-docker-config.yaml
-        dest: "{{ loki_dir }}/{{ promtail_config_file }}"
-        mode: "0644"
-
-    - name: Run Loki container
-      community.docker.docker_container:
-        name: "{{ loki_container_name }}"
-        image: "{{ loki_image }}"
-        restart_policy: always
-        ports:
-          - "3100:3100"
-        volumes:
-          - "{{ loki_dir }}:/mnt/config"
-        command: "-config.file=/mnt/config/{{ loki_config_file }}"
-        state: started
-
-    - name: Run Promtail container
-      community.docker.docker_container:
-        name: "{{ promtail_container_name }}"
-        image: "{{ promtail_image }}"
-        restart_policy: always
-        volumes:
-          - "{{ loki_dir }}:/mnt/config"
-          - "/var/log:/var/log"
-        links:
-          - "{{ loki_container_name }}"
-        command: "-config.file=/mnt/config/{{ promtail_config_file }}"
-        state: started
+    - name: Bring up Loki stack with Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ loki_dir }}"
+        state: present
