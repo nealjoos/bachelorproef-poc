@@ -757,7 +757,7 @@
 		<category>left=system-processor&amp;right=&amp;resolution=300&amp;timePeriod=-1d&amp;startDate=&amp;endDate=&amp;startTime=0&amp;endTime=0&amp;graphtype=line&amp;invert=true&amp;refresh-interval=0</category>
 	</rrd>
 	<widgets>
-		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show,pfblockerng:col2:open:0</sequence>
+		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show</sequence>
 		<period>10</period>
 	</widgets>
 	<openvpn></openvpn>
@@ -786,8 +786,8 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1754496550</time>
-		<description><![CDATA[(system): pfBlockerNG: saving DNSBL changes]]></description>
+		<time>1754941519</time>
+		<description><![CDATA[(system): Removed Telegraf package.]]></description>
 		<username><![CDATA[(system)]]></username>
 	</revision>
 	<gateways></gateways>
@@ -849,53 +849,12 @@
 	<cert>
 		<refid>6802197c15a10</refid>
 		<descr><![CDATA[bp-poc.nealjoos.be]]></descr>
-		<crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlEdERDQ0F6cWdBd0lCQWdJU0JRVjJFb3QyWDJYMmRTKzV2S3JqQzJaK01Bb0dDQ3FHU000OUJBTURNREl4DQpDekFKQmdOVkJBWVRBbFZUTVJZd0ZBWURWUVFLRXcxTVpYUW5jeUJGYm1OeWVYQjBNUXN3Q1FZRFZRUURFd0pGDQpOakFlRncweU5UQTBNVEV3TnpVME16UmFGdzB5TlRBM01UQXdOelUwTXpOYU1CMHhHekFaQmdOVkJBTVRFbUp3DQpMWEJ2WXk1dVpXRnNhbTl2Y3k1aVpUQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJKSU96bVp0DQpsVHVuRXVtTXdYU21CSkptTEZUVHdUK2tLbmpOTEkvRjJ6Znd3NWtzUFdiYXR1dTFNNStBeGhhZEkrTXJ6QkM0DQpxbnlIZXVSU0hIbXlIZUNqZ2dKRE1JSUNQekFPQmdOVkhROEJBZjhFQkFNQ0I0QXdIUVlEVlIwbEJCWXdGQVlJDQpLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUNNQXdHQTFVZEV3RUIvd1FDTUFBd0hRWURWUjBPQkJZRUZGMTIvd2ZNDQppbjhmdmEzVncxUzk5dkNzN1d3Rk1COEdBMVVkSXdRWU1CYUFGSk1uUnBnRHFWRm9qcGpXeEVKSTJ5Ty9XSlRTDQpNRlVHQ0NzR0FRVUZCd0VCQkVrd1J6QWhCZ2dyQmdFRkJRY3dBWVlWYUhSMGNEb3ZMMlUyTG04dWJHVnVZM0l1DQpiM0puTUNJR0NDc0dBUVVGQnpBQ2hoWm9kSFJ3T2k4dlpUWXVhUzVzWlc1amNpNXZjbWN2TUIwR0ExVWRFUVFXDQpNQlNDRW1Kd0xYQnZZeTV1WldGc2FtOXZjeTVpWlRBVEJnTlZIU0FFRERBS01BZ0dCbWVCREFFQ0FUQXVCZ05WDQpIUjhFSnpBbE1DT2dJYUFmaGgxb2RIUndPaTh2WlRZdVl5NXNaVzVqY2k1dmNtY3ZNVEkzTG1OeWJEQ0NBUU1HDQpDaXNHQVFRQjFua0NCQUlFZ2ZRRWdmRUE3d0IyQU8wOFM5Ym9Cc0trb2dCWDI4c2s0amdCMzFFdjdjU0d4WEFQDQpJTjIzUGovZ0FBQUJsaVFOZUZVQUFBUURBRWN3UlFJaEFQcVBSa2lDc0RQdHBKRVJUek55dmcrY1hmRWo3eXJwDQo3ZGNKcVRocHYrdS9BaUJjV3F3bnVET3A0UHpyOU5BcysxZS9qcldyMUoyR2t4blQ4aFRwVUl4eEp3QjFBTjNjDQp5alNWMStFV0JlZVZNdnJIbi9nOUhGRGYyd0E2RkJKMkNpeXN1OGdxQUFBQmxpUU5lSnNBQUFRREFFWXdSQUlnDQpLUnhZZ3haaFA3ZFdQc052WXF0aml4TWc0WEt1NUdRZVRaOWdUWkRoZU13Q0lCM2tiNUZDcGZhaTQvQjBtcjJyDQpjZGtTOFRVT1g2WU84QUV0RitHa2ZwK3dNQW9HQ0NxR1NNNDlCQU1EQTJnQU1HVUNNUURoNnFteUdISzBod1h3DQpKL3Q2SmUvL3dVcitiRVBNNFJxRXg5OGs4RHhIY0xWZ0x5d3Z6UVQ5blZKNGp6K2pNVnNDTUEwSGR4UTVZZ0hrDQpoL2RrMllEbnh4S1RGY25yM0RNYXhvK1kramNiQk85ajI0bW1EaTRTanhwQTUxb09pTDhEblE9PQ0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==</crt>
-		<prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tDQpNSUdIQWdFQU1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhCRzB3YXdJQkFRUWdOT0trZUVhcFZkK0lTY0l1DQp3VXZKNWlqdjN5b21FTitDNmxiTjU2UFUyZHFoUkFOQ0FBU1NEczVtYlpVN3B4THBqTUYwcGdTU1ppeFUwOEUvDQpwQ3A0elN5UHhkczM4TU9aTEQxbTJyYnJ0VE9mZ01ZV25TUGpLOHdRdUtwOGgzcmtVaHg1c2gzZw0KLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ==</prv>
+		<crt>LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlEa1RDQ0F4ZWdBd0lCQWdJU0JzY0R2MTl1VnFHOWExSDV2eDVKN3NKSk1Bb0dDQ3FHU000OUJBTURNREl4DQpDekFKQmdOVkJBWVRBbFZUTVJZd0ZBWURWUVFLRXcxTVpYUW5jeUJGYm1OeWVYQjBNUXN3Q1FZRFZRUURFd0pGDQpOVEFlRncweU5UQTRNVEV4TURFME5EQmFGdzB5TlRFeE1Ea3hNREUwTXpsYU1CMHhHekFaQmdOVkJBTVRFbUp3DQpMWEJ2WXk1dVpXRnNhbTl2Y3k1aVpUQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJKL0pmaHZxDQpnUjlTaFJITlkwVStQUU1vUnhUUjJ2cituQ2VXRDhwTW9YMSt1RFp5dFNZclBlQWc5NHdSdWN6ejBRZ3VORjBnDQpNczA5dFUvYXpuQVlYdUNqZ2dJZ01JSUNIREFPQmdOVkhROEJBZjhFQkFNQ0I0QXdIUVlEVlIwbEJCWXdGQVlJDQpLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUNNQXdHQTFVZEV3RUIvd1FDTUFBd0hRWURWUjBPQkJZRUZET2hPR3U3DQpxdGVpWjcyY3hzUUwxWkFGM0dFNU1COEdBMVVkSXdRWU1CYUFGSjhyWDg4OElVK2RCTGZ0S3l6RXhuQ0wwdGNODQpNRElHQ0NzR0FRVUZCd0VCQkNZd0pEQWlCZ2dyQmdFRkJRY3dBb1lXYUhSMGNEb3ZMMlUxTG1rdWJHVnVZM0l1DQpiM0puTHpBZEJnTlZIUkVFRmpBVWdoSmljQzF3YjJNdWJtVmhiR3B2YjNNdVltVXdFd1lEVlIwZ0JBd3dDakFJDQpCZ1puZ1F3QkFnRXdMUVlEVlIwZkJDWXdKREFpb0NDZ0hvWWNhSFIwY0RvdkwyVTFMbU11YkdWdVkzSXViM0puDQpMemMwTG1OeWJEQ0NBUVFHQ2lzR0FRUUIxbmtDQkFJRWdmVUVnZklBOEFCMkFPMDhTOWJvQnNLa29nQlgyOHNrDQo0amdCMzFFdjdjU0d4WEFQSU4yM1BqL2dBQUFCbUpqVms0WUFBQVFEQUVjd1JRSWhBUHlPZDFUdUwyRmNQQXgxDQpKSEI5dzdzeWRwaVFOcWJnWlVvczQ1MEVxL3liQWlBSHlVcDZYMEQvVGZDQWZrMmNUQmR0VzEzZWJLb3lpY0FEDQpFRmxlcllvbU13QjJBTjNjeWpTVjErRVdCZWVWTXZySG4vZzlIRkRmMndBNkZCSjJDaXlzdThncUFBQUJtSmpWDQprNndBQUFRREFFY3dSUUlnTjlJbUkvMmxScUVOS040cUJzam9CSnNDSmZHdnlpK3VzSjdjVlNoSURIY0NJUUNmDQpsTUlRT3hzci9VelhlckMvYi92d2MxVndSMU9IeTluUG9UWUxVZDk4aHpBS0JnZ3Foa2pPUFFRREF3Tm9BREJsDQpBakVBdm1CSnU0NUcxblA3bkFIV1RPL0dzNC8xYUsxZGs0QVd5R2pHZVJ3NTBjek8zRFVkKzM1d1c0V21xZjdkDQphNUZyQWpCZSt4ZWxuRHh4bitRWHhveXpXZU5rTHh2ckJGekw3RjUyQXZFMVpheUQyamxRTmRQeHhlNlRyaWJ4DQpkQ3U3MkdjPQ0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlFVnpDQ0FqK2dBd0lCQWdJUkFJT1BiR1BPc1RtTVlnWmlneFhKL2Q0d0RRWUpLb1pJaHZjTkFRRUxCUUF3DQpUekVMTUFrR0ExVUVCaE1DVlZNeEtUQW5CZ05WQkFvVElFbHVkR1Z5Ym1WMElGTmxZM1Z5YVhSNUlGSmxjMlZoDQpjbU5vSUVkeWIzVndNUlV3RXdZRFZRUURFd3hKVTFKSElGSnZiM1FnV0RFd0hoY05NalF3TXpFek1EQXdNREF3DQpXaGNOTWpjd016RXlNak0xT1RVNVdqQXlNUXN3Q1FZRFZRUUdFd0pWVXpFV01CUUdBMVVFQ2hNTlRHVjBKM01nDQpSVzVqY25sd2RERUxNQWtHQTFVRUF4TUNSVFV3ZGpBUUJnY3Foa2pPUFFJQkJnVXJnUVFBSWdOaUFBUU5DenFLDQphMkdPdHUvY1gxam54a0pGVkt0ajltWmhTQW91V1hXMGdRSTNVTGMvRm5uY21PeWhLSmR5SUJ3c3o5VjhVaUJPDQpWSGhiaEJScndKQ3VoZXpBVVVFOFdvZC9CazNVL21EUittd3Q0WDJWRUlpaUNGUVBtUnBNNXVvS3JOaWpnZmd3DQpnZlV3RGdZRFZSMFBBUUgvQkFRREFnR0dNQjBHQTFVZEpRUVdNQlFHQ0NzR0FRVUZCd01DQmdnckJnRUZCUWNEDQpBVEFTQmdOVkhSTUJBZjhFQ0RBR0FRSC9BZ0VBTUIwR0ExVWREZ1FXQkJTZksxL1BQQ0ZQblFTMzdTc3N4TVp3DQppOUxYRFRBZkJnTlZIU01FR0RBV2dCUjV0Rm5tZTdibDVBRnpnQWlJeUJwWTl1bWJiakF5QmdnckJnRUZCUWNCDQpBUVFtTUNRd0lnWUlLd1lCQlFVSE1BS0dGbWgwZEhBNkx5OTRNUzVwTG14bGJtTnlMbTl5Wnk4d0V3WURWUjBnDQpCQXd3Q2pBSUJnWm5nUXdCQWdFd0p3WURWUjBmQkNBd0hqQWNvQnFnR0lZV2FIUjBjRG92TDNneExtTXViR1Z1DQpZM0l1YjNKbkx6QU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FnRUFIM0tkTkVWQ1FkcWswTEt5dU5JbVRLZFJKWTFDDQoydXcyU0phanVocWt5R1BZOEMrenpzdWZaK21nbmhucTFBMktWUU9TeWtPRW5VYngxY3k2MzdyQkFpaHg5N3IrDQpiY3diWk02c1RESWFFcmlSL1BMazZMS3M5QmUwdW9WeGdPS0RjcEc5c3ZEMzNKK0c5TGNmdjFLOWx1RG1TVGdHDQo2WE5GSU41dmZJNWdzL2xNUHlvakVNZEl6SzlibGNsMi8xdkt4TzhXR0NjanZzUTFuSi9Qd3Q4TFFaQmZPRnlWDQpYUDh1YkFwL2F1M2RjNEVLV0c5TU81emN4MXFUOStOWFJHZFZXeEd2bUJGUkFhamNpTWZYTUUxWnVHbWszL0dPDQprb0FNN1pralptbGV5b2tQMUxHem1mSmNVZDlzN2VldTEvOS9lZzVYbFhkLzU1R3RZakFNK0M0REc1aTdlYU5xDQpjbTJGK3l4WUlQdDZjYmJ0WVZOSkNHZkhXcUhFUTRGWVN0VXlGbnY4c2p5cVU4eXBnWmFOSjlhVmNXU0lDTE9JDQpFMS9Rdi83b0tzblpDV0o5MjZ3VTZScUcxT1lQR09pMXp1QUJoTHc2MWN1UFZEVDI4blFTL2U2ejk1Y0pYcTBlDQpLMUJjYUo2Zkpac21ialJnRDVwM212RWY1dmRRTTdNQ0V2VTB0SGJzeDJJNW1ISEpvQUJIYjhLVkJnV3AvbGNYDQpHV2lXYWVPeUI3UlArT2ZEdHZpMk9zYXB4WGlWN3ZOVnM3Zk1sclJqWTFqb0thcW1teWNuQnZBcTE0QUVidHlMDQpzVmZPUzY2QjhhcGtlRlgyTlk0WFBFWVY0WlNDZThWSFByZHJFUmsyd0lMRzNUL0VHbVNJa0NZVlVNU25qbUpkDQpWUUQ5RjZOYS8rem1YQ2M9DQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t</crt>
+		<prv>LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tDQpNSUdIQWdFQU1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhCRzB3YXdJQkFRUWdoTG54VXl2M0ZBMDgyaE9SDQpNKzhQTXRNWVl0K0JUZFRnRllYTVVzUEp6cHloUkFOQ0FBU2Z5WDRiNm9FZlVvVVJ6V05GUGowREtFY1UwZHI2DQovcHdubGcvS1RLRjlmcmcyY3JVbUt6M2dJUGVNRWJuTTg5RUlMalJkSURMTlBiVlAyczV3R0Y3Zw0KLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ==</prv>
 	</cert>
 	<ppps></ppps>
 	<dhcpbackend>kea</dhcpbackend>
 	<installedpackages>
-		<package>
-			<name>ntopng</name>
-			<website>http://www.ntop.org/</website>
-			<descr><![CDATA[ntopng (replaces ntop) is a network probe that shows network usage in a way similar to what top does for processes. In interactive mode, it displays the network status on the user&#039;s terminal. In Web mode it acts as a Web server, creating an HTML dump of the network status. It sports a NetFlow/sFlow emitter/collector, an HTTP-based client interface for creating ntop-centric monitoring applications, and RRD for persistently storing traffic statistics.]]></descr>
-			<version>0.8.13_10</version>
-			<configurationfile>ntopng.xml</configurationfile>
-			<noembedded>true</noembedded>
-			<tabs>
-				<tab>
-					<text><![CDATA[ntopng Settings]]></text>
-					<url>/pkg_edit.php?xml=ntopng.xml</url>
-					<active></active>
-				</tab>
-				<tab>
-					<text><![CDATA[Access ntopng]]></text>
-					<url>/ntopng_redirect.php</url>
-				</tab>
-			</tabs>
-			<include_file>/usr/local/pkg/ntopng.inc</include_file>
-		</package>
-		<package>
-			<name>pfBlockerNG-devel</name>
-			<descr><![CDATA[pfBlockerNG-devel is the Next Generation of pfBlockerNG.&lt;br /&gt;
-			Manage IPv4/v6 List Sources into &#039;Deny, Permit or Match&#039; formats.&lt;br /&gt;
-			GeoIP database by MaxMind Inc. (GeoLite2 Free version).&lt;br /&gt;
-			De-Duplication, Suppression, and Reputation enhancements.&lt;br /&gt;
-			Provision to download from diverse List formats.&lt;br /&gt;
-			Advanced Integration for Proofpoint ET IQRisk IP Reputation Threat Sources.&lt;br /&gt;
-			Domain Name (DNSBL) blocking via Unbound DNS Resolver.]]></descr>
-			<pkginfolink>https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html</pkginfolink>
-			<version>3.2.0_7</version>
-			<configurationfile>pfblockerng.xml</configurationfile>
-			<include_file>/usr/local/pkg/pfblockerng/pfblockerng.inc</include_file>
-		</package>
-		<package>
-			<name>Telegraf</name>
-			<descr><![CDATA[Telegraf is an agent written in Go for collecting, processing, aggregating, and writing metrics.]]></descr>
-			<version>0.9_6</version>
-			<configurationfile>telegraf.xml</configurationfile>
-			<include_file>/usr/local/pkg/telegraf.inc</include_file>
-		</package>
 		<ntopng>
 			<config>
 				<enable>on</enable>
@@ -924,50 +883,14 @@
 			<section>Diagnostics</section>
 			<url>/ntopng_redirect.php</url>
 		</menu>
-		<menu>
-			<name>pfBlockerNG</name>
-			<section>Firewall</section>
-			<url>/pfblockerng/pfblockerng_general.php</url>
-		</menu>
-		<menu>
-			<name>Telegraf</name>
-			<section>Services</section>
-			<configfile>telegraf.xml</configfile>
-			<url>/pkg_edit.php?xml=telegraf.xml</url>
-		</menu>
 		<service>
 			<name>ntopng</name>
 			<rcfile>ntopng.sh</rcfile>
 			<executable>ntopng</executable>
 			<description><![CDATA[ntopng Network Traffic Monitor]]></description>
 		</service>
-		<service>
-			<name>pfb_dnsbl</name>
-			<rcfile>pfb_dnsbl.sh</rcfile>
-			<executable>lighttpd_pfb</executable>
-			<description><![CDATA[pfBlockerNG DNSBL service]]></description>
-		</service>
-		<service>
-			<name>pfb_filter</name>
-			<rcfile>pfb_filter.sh</rcfile>
-			<executable>php_pfb</executable>
-			<description><![CDATA[pfBlockerNG firewall filter service]]></description>
-		</service>
-		<service>
-			<name>telegraf</name>
-			<rcfile>telegraf.sh</rcfile>
-			<executable>telegraf</executable>
-			<description><![CDATA[Telegraf daemon]]></description>
-		</service>
-		<pfblockerng></pfblockerng>
-		<pfblockerngipsettings></pfblockerngipsettings>
-		<pfblockerngdnsblsettings></pfblockerngdnsblsettings>
-		<pfblockerngblacklist></pfblockerngblacklist>
-		<pfblockerngglobal></pfblockerngglobal>
-		<pfblockerngsafesearch></pfblockerngsafesearch>
 	</installedpackages>
-	<virtualip>
-	</virtualip>
+	<virtualip></virtualip>
 	<dhcrelay></dhcrelay>
 	<dhcrelay6></dhcrelay6>
 	<sysctl></sysctl>
