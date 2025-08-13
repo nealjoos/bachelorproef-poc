@@ -283,9 +283,9 @@
 		<filterdescriptions>1</filterdescriptions>
 		<nentries>500</nentries>
 		<logcompressiontype>none</logcompressiontype>
-		<format>rfc3164</format>
+		<format>rfc5424</format>
 		<rotatecount></rotatecount>
-		<remoteserver>192.168.56.20:5140</remoteserver>
+		<remoteserver>192.168.56.10:5140</remoteserver>
 		<remoteserver2></remoteserver2>
 		<remoteserver3></remoteserver3>
 		<sourceip>lan</sourceip>
@@ -786,9 +786,9 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1754941519</time>
-		<description><![CDATA[(system): Removed Telegraf package.]]></description>
-		<username><![CDATA[(system)]]></username>
+		<time>1755097037</time>
+		<description><![CDATA[admin@192.168.56.1 (Local Database): Changed system logging options.]]></description>
+		<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 	</revision>
 	<gateways></gateways>
 	<captiveportal>
