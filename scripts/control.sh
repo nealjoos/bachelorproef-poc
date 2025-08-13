@@ -44,7 +44,7 @@ dnf install --assumeyes \
     sshpass \
     nc
 
-python3 -m pip install --user ansible
+python3 -m pip install --user ansible paramiko
 
 # Scan for SSH keys
 log "Scanning remote hosts"
@@ -79,11 +79,6 @@ for i in {1..30}; do
   fi
 
   if [[ $i -eq 30 ]]; then
-
-
-
-
-
     log "Timeout waiting for pfSense SSH. Exiting..."
     exit 1
   fi
@@ -94,7 +89,8 @@ ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/pfsense.y
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/ntopng.yml"
 
 
-# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
-# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/loki.yml"
+ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
+
+ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/loki.yml"
 
 # ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/adguard.yml"

@@ -5,11 +5,12 @@
 
   tasks:
     - name: Ensure Python Docker SDK is installed (only if not done in docker-install)
-      pip:
+      ansible.builtin.pip:
         name:
           - docker
-          - requests
-        executable: pip3
+          - requests==2.31.0
+          - paramiko
+        state: latest
 
     - name: Ensure loki directory exists
       file:
