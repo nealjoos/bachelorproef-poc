@@ -290,9 +290,7 @@
 		<remoteserver3></remoteserver3>
 		<sourceip>lan</sourceip>
 		<ipproto>ipv4</ipproto>
-		<logall></logall>
 		<logconfigchanges>enabled</logconfigchanges>
-		<enable></enable>
 		<filter_settings>
 			<cronorder>reverse</cronorder>
 		</filter_settings>
@@ -302,6 +300,8 @@
 		<system_settings>
 			<cronorder>reverse</cronorder>
 		</system_settings>
+		<portalauth></portalauth>
+		<enable></enable>
 	</syslog>
 	<nat>
 		<outbound>
@@ -309,6 +309,68 @@
 		</outbound>
 	</nat>
 	<filter>
+		<rule>
+			<quick>yes</quick>
+			<floating>yes</floating>
+			<ipprotocol>inet46</ipprotocol>
+			<tracker>1770001239</tracker>
+			<type>pass</type>
+			<direction>any</direction>
+			<interface>opt1</interface>
+			<descr><![CDATA[pfB_DNSBL_Ping]]></descr>
+			<protocol>icmp</protocol>
+			<icmptype>echoreq</icmptype>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_DNSBL_VIPs</address>
+			</destination>
+			<created>
+				<time>1755195274</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+		</rule>
+		<rule>
+			<quick>yes</quick>
+			<floating>yes</floating>
+			<ipprotocol>inet46</ipprotocol>
+			<tracker>1770001466</tracker>
+			<type>pass</type>
+			<direction>any</direction>
+			<interface>opt1</interface>
+			<descr><![CDATA[pfB_DNSBL_Permit]]></descr>
+			<protocol>tcp/udp</protocol>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_DNSBL_VIPs</address>
+				<port>pfB_DNSBL_Ports</port>
+			</destination>
+			<created>
+				<time>1755195274</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+		</rule>
+		<rule>
+			<ipprotocol>inet</ipprotocol>
+			<type>reject</type>
+			<descr><![CDATA[pfB_PRI1_v4]]></descr>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_PRI1_v4</address>
+			</destination>
+			<log></log>
+			<created>
+				<time>1755195274</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+			<interface>opt1</interface>
+			<tracker>1770008827</tracker>
+		</rule>
 		<rule>
 			<type>pass</type>
 			<ipprotocol>inet</ipprotocol>
@@ -633,6 +695,7 @@
 				<time>1744966979</time>
 				<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 			</created>
+			<disabled></disabled>
 		</rule>
 		<separator>
 			<opt1></opt1>
@@ -643,6 +706,29 @@
 		<client></client>
 	</ipsec>
 	<aliases>
+		<alias>
+			<name>pfB_PRI1_v4</name>
+			<url>https://127.0.0.1:443/pfblockerng/pfblockerng.php?pfb=pfB_PRI1_v4</url>
+			<updatefreq>32</updatefreq>
+			<address></address>
+			<descr><![CDATA[pfBlockerNG  Auto  Alias [ Abuse_Feodo_C2_v4,Abuse_SSLBL_v4,CINS_army_v4,ET_Block_v4,ET_Comp_v4,ISC_Block_v4,Spamhaus_Drop_v4,Spamhaus_eDrop_v4,Talos_BL_v4, ]]]></descr>
+			<type>urltable</type>
+			<detail><![CDATA[DO NOT EDIT THIS ALIAS]]></detail>
+		</alias>
+		<alias>
+			<name>pfB_DNSBL_Ports</name>
+			<address>80 443</address>
+			<descr><![CDATA[pfBlockerNG DNSBL VIP Ports]]></descr>
+			<type>port</type>
+			<detail><![CDATA[DO NOT EDIT THIS PORT||DO NOT EDIT THIS PORT]]></detail>
+		</alias>
+		<alias>
+			<name>pfB_DNSBL_VIPs</name>
+			<address>10.10.10.1 ::10.10.10.1</address>
+			<descr><![CDATA[pfBlockerNG DNSBL VIPs]]></descr>
+			<type>host</type>
+			<detail><![CDATA[DO NOT EDIT THIS HOST||DO NOT EDIT THIS HOST]]></detail>
+		</alias>
 		<alias>
 			<name>RFC1918</name>
 			<type>network</type>
@@ -750,6 +836,33 @@
 			<who>root</who>
 			<command>/usr/bin/nice -n20 /etc/rc.update_pkg_metadata</command>
 		</item>
+		<item>
+			<minute>0</minute>
+			<hour>*</hour>
+			<mday>*</mday>
+			<month>*</month>
+			<wday>*</wday>
+			<who>root</who>
+			<command>/usr/bin/nice -n20 /usr/local/sbin/logrotate /usr/local/etc/logrotate.conf</command>
+		</item>
+		<item>
+			<minute>0</minute>
+			<hour>18</hour>
+			<mday>*</mday>
+			<month>*</month>
+			<wday>*</wday>
+			<who>root</who>
+			<command>/usr/local/bin/php /usr/local/www/pfblockerng/pfblockerng.php dcc &gt;&gt; /var/log/pfblockerng/extras.log 2&gt;&amp;1</command>
+		</item>
+		<item>
+			<minute>0</minute>
+			<hour>*</hour>
+			<mday>*</mday>
+			<month>*</month>
+			<wday>*</wday>
+			<who>root</who>
+			<command>/usr/local/bin/php /usr/local/www/pfblockerng/pfblockerng.php cron &gt;&gt; /var/log/pfblockerng/pfblockerng.log 2&gt;&amp;1</command>
+		</item>
 	</cron>
 	<wol></wol>
 	<rrd>
@@ -757,7 +870,7 @@
 		<category>left=system-processor&amp;right=&amp;resolution=300&amp;timePeriod=-1d&amp;startDate=&amp;endDate=&amp;startTime=0&amp;endTime=0&amp;graphtype=line&amp;invert=true&amp;refresh-interval=0</category>
 	</rrd>
 	<widgets>
-		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show</sequence>
+		<sequence>system_information:col1:show,disks:col1:show,netgate_services_and_support:col2:show,interfaces:col2:show,pfblockerng:col2:open:0</sequence>
 		<period>10</period>
 	</widgets>
 	<openvpn></openvpn>
@@ -766,10 +879,9 @@
 		<enable></enable>
 		<active_interface>all</active_interface>
 		<outgoing_interface>all</outgoing_interface>
-		<custom_options></custom_options>
+		<custom_options>c2VydmVyOmluY2x1ZGU6IC92YXIvdW5ib3VuZC9wZmJfZG5zYmwuKmNvbmY=</custom_options>
 		<hideidentity></hideidentity>
 		<hideversion></hideversion>
-		<dnssecstripped></dnssecstripped>
 		<port></port>
 		<tlsport></tlsport>
 		<sslcertref>68016aeb9db95</sslcertref>
@@ -782,11 +894,25 @@
 			<descr><![CDATA[Captive portal host]]></descr>
 			<aliases></aliases>
 		</hosts>
+		<sock_queue_timeout>0</sock_queue_timeout>
+		<msgcachesize>4</msgcachesize>
+		<outgoing_num_tcp>10</outgoing_num_tcp>
+		<incoming_num_tcp>10</incoming_num_tcp>
+		<edns_buffer_size>auto</edns_buffer_size>
+		<num_queries_per_thread>512</num_queries_per_thread>
+		<jostle_timeout>200</jostle_timeout>
+		<cache_max_ttl>86400</cache_max_ttl>
+		<cache_min_ttl>0</cache_min_ttl>
+		<infra_keep_probing>enabled</infra_keep_probing>
+		<infra_host_ttl>900</infra_host_ttl>
+		<infra_cache_numhosts>10000</infra_cache_numhosts>
+		<unwanted_reply_threshold>disabled</unwanted_reply_threshold>
+		<log_verbosity>3</log_verbosity>
 	</unbound>
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1755097037</time>
+		<time>1755258863</time>
 		<description><![CDATA[admin@192.168.56.1 (Local Database): Changed system logging options.]]></description>
 		<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 	</revision>
@@ -833,6 +959,12 @@
 			</allowedhostname>
 			<enable></enable>
 			<httpslogin></httpslogin>
+			<customlogo></customlogo>
+			<element>
+				<name>captiveportal-logo.png</name>
+				<size>70624</size>
+				<nocontent></nocontent>
+			</element>
 		</students>
 	</captiveportal>
 	<dnsmasq></dnsmasq>
@@ -883,14 +1015,407 @@
 			<section>Diagnostics</section>
 			<url>/ntopng_redirect.php</url>
 		</menu>
+		<menu>
+			<name>Syslog-ng</name>
+			<tooltiptext>Setup Syslog-ng</tooltiptext>
+			<section>Services</section>
+			<url>/pkg_edit.php?xml=syslogng.xml&amp;id=0</url>
+		</menu>
+		<menu>
+			<name>pfBlockerNG</name>
+			<section>Firewall</section>
+			<url>/pfblockerng/pfblockerng_general.php</url>
+		</menu>
 		<service>
 			<name>ntopng</name>
 			<rcfile>ntopng.sh</rcfile>
 			<executable>ntopng</executable>
 			<description><![CDATA[ntopng Network Traffic Monitor]]></description>
 		</service>
+		<service>
+			<name>syslog-ng</name>
+			<rcfile>syslog-ng.sh</rcfile>
+			<executable>syslog-ng</executable>
+			<description><![CDATA[Syslog-ng Syslog Server]]></description>
+		</service>
+		<service>
+			<name>pfb_dnsbl</name>
+			<rcfile>pfb_dnsbl.sh</rcfile>
+			<executable>lighttpd_pfb</executable>
+			<description><![CDATA[pfBlockerNG DNSBL service]]></description>
+		</service>
+		<service>
+			<name>pfb_filter</name>
+			<rcfile>pfb_filter.sh</rcfile>
+			<executable>php_pfb</executable>
+			<description><![CDATA[pfBlockerNG firewall filter service]]></description>
+		</service>
+		<package>
+			<name>pfBlockerNG-devel</name>
+			<descr><![CDATA[pfBlockerNG-devel is the Next Generation of pfBlockerNG.&lt;br /&gt;
+			Manage IPv4/v6 List Sources into &#039;Deny, Permit or Match&#039; formats.&lt;br /&gt;
+			GeoIP database by MaxMind Inc. (GeoLite2 Free version).&lt;br /&gt;
+			De-Duplication, Suppression, and Reputation enhancements.&lt;br /&gt;
+			Provision to download from diverse List formats.&lt;br /&gt;
+			Advanced Integration for Proofpoint ET IQRisk IP Reputation Threat Sources.&lt;br /&gt;
+			Domain Name (DNSBL) blocking via Unbound DNS Resolver.]]></descr>
+			<pkginfolink>https://docs.netgate.com/pfsense/en/latest/packages/pfblocker.html</pkginfolink>
+			<version>3.2.0_20</version>
+			<configurationfile>pfblockerng.xml</configurationfile>
+			<include_file>/usr/local/pkg/pfblockerng/pfblockerng.inc</include_file>
+		</package>
+		<package>
+			<name>syslog-ng</name>
+			<website>http://www.balabit.com/network-security/syslog-ng/</website>
+			<descr><![CDATA[Syslog-ng syslog server. This service is not intended to replace the default pfSense syslog server but rather acts as an independent syslog server.]]></descr>
+			<version>1.16</version>
+			<configurationfile>syslogng.xml</configurationfile>
+			<plugins>
+				<item>
+					<type>plugin_certificates</type>
+				</item>
+			</plugins>
+			<filter_rule_function>syslogng_generate_rules</filter_rule_function>
+			<tabs>
+				<tab>
+					<text><![CDATA[General]]></text>
+					<url>/pkg_edit.php?xml=syslogng.xml&amp;id=0</url>
+					<active></active>
+				</tab>
+				<tab>
+					<text><![CDATA[Advanced]]></text>
+					<url>/pkg.php?xml=syslog-ng_advanced.xml</url>
+				</tab>
+				<tab>
+					<text><![CDATA[Log Viewer]]></text>
+					<url>/syslog-ng_log_viewer.php</url>
+				</tab>
+			</tabs>
+			<include_file>/usr/local/pkg/syslog-ng.inc</include_file>
+		</package>
+		<pfblockerng>
+			<config>
+				<enable_cb>on</enable_cb>
+				<pfb_keep>on</pfb_keep>
+				<pfb_reuse></pfb_reuse>
+			</config>
+		</pfblockerng>
+		<pfblockerngipsettings>
+			<config>
+				<enable_dup>on</enable_dup>
+				<suppression>on</suppression>
+				<inbound_interface>wan</inbound_interface>
+				<inbound_deny_action>block</inbound_deny_action>
+				<outbound_interface>opt1</outbound_interface>
+				<outbound_deny_action>reject</outbound_deny_action>
+				<pass_order>order_0</pass_order>
+				<v4suppression></v4suppression>
+			</config>
+		</pfblockerngipsettings>
+		<pfblockerngdnsblsettings>
+			<config>
+				<pfb_dnsvip>10.10.10.1</pfb_dnsvip>
+				<pfb_dnsport>8081</pfb_dnsport>
+				<pfb_dnsport_ssl>8443</pfb_dnsport_ssl>
+				<pfb_dnsblv6>on</pfb_dnsblv6>
+				<pfb_dnsbl>on</pfb_dnsbl>
+				<suppression>czMuYW1hem9uYXdzLmNvbQ0KczMtMS5hbWF6b25hd3MuY29tICMgQ05BTUUgZm9yIChzMy5hbWF6b25hd3MuY29tKQ0KLmdpdGh1Yi5jb20NCi5naXRodWJ1c2VyY29udGVudC5jb20gDQpnaXRodWIubWFwLmZhc3RseS5uZXQgIyBDTkFNRSBmb3IgKHJhdy5naXRodWJ1c2VyY29udGVudC5jb20pDQouZ2l0bGFiLmNvbQ0KLnNvdXJjZWZvcmdlLm5ldA0KLmZscy1uYS5hbWF6b24uY29tICMgYWxleGENCi5jb250cm9sLmtvY2hhdmEuY29tICMgYWxleGEgMg0KLmRldmljZS1tZXRyaWNzLXVzLTIuYW1hem9uLmNvbSAjIGFsZXhhIDMNCi5hbWF6b24tYWRzeXN0ZW0uY29tICMgYW1hem9uIGFwcCBhZHMNCi5weC5tb2F0YWRzLmNvbSAjIGFtYXpvbiBhcHAgMg0KLndpbGRjYXJkLm1vYXRhZHMuY29tLmVkZ2VrZXkubmV0ICMgQ05BTUUgZm9yIChweC5tb2F0YWRzLmNvbSkNCi5lMTMxMzYuZy5ha2FtYWllZGdlLm5ldCAjIENOQU1FIGZvciAocHgubW9hdGFkcy5jb20pDQouc2VjdXJlLWdsLmltcndvcmxkd2lkZS5jb20gIyBhbWF6b24gYXBwIDMNCi5waXhlbC5hZHNhZmVwcm90ZWN0ZWQuY29tICMgYW1hem9uIGFwcCA0DQouYW55Y2FzdC5waXhlbC5hZHNhZmVwcm90ZWN0ZWQuY29tICMgQ05BTUUgZm9yIChwaXhlbC5hZHNhZmVwcm90ZWN0ZWQuY29tKQ0KLmJzLnNlcnZpbmctc3lzLmNvbSAjIGFtYXpvbiBhcHAgNQ0KLmJzLmV5ZWJsYXN0ZXIuYWthZG5zLm5ldCAjIENOQU1FIGZvciAoYnMuc2VydmluZy1zeXMuY29tKQ0KLmJzbGEuZXllYmxhc3Rlci5ha2FkbnMubmV0ICMgQ05BTUUgZm9yIChicy5zZXJ2aW5nLXN5cy5jb20pDQouYWRzYWZlcHJvdGVjdGVkLmNvbSAjIGFtYXpvbiBhcHAgNg0KLmFueWNhc3Quc3RhdGljLmFkc2FmZXByb3RlY3RlZC5jb20gIyBDTkFNRSBmb3IgKHN0YXRpYy5hZHNhZmVwcm90ZWN0ZWQuY29tKQ0KZ29vZ2xlLmNvbQ0Kd3d3Lmdvb2dsZS5jb20NCnlvdXR1YmUuY29tDQp3d3cueW91dHViZS5jb20NCnlvdXR1YmUtdWkubC5nb29nbGUuY29tICMgQ05BTUUgZm9yICh5b3V0dWJlLmNvbSkNCnN0YWNrb3ZlcmZsb3cuY29tDQp3d3cuc3RhY2tvdmVyZmxvdy5jb20NCmRyb3Bib3guY29tDQp3d3cuZHJvcGJveC5jb20NCnd3dy5kcm9wYm94LWRucy5jb20gIyBDTkFNRSBmb3IgKGRyb3Bib3guY29tKQ0KLmFkc2FmZXByb3RlY3RlZC5jb20NCmNvbnRyb2wua29jaGF2YS5jb20NCnNlY3VyZS1nbC5pbXJ3b3JsZHdpZGUuY29tDQpwYnMudHdpbWcuY29tICMgdHdpdHRlciBpbWFnZXMNCnd3dy5wYnMudHdpbWcuY29tICMgdHdpdHRlciBpbWFnZXMNCmNzMTk2LndhYy5lZGdlY2FzdGNkbi5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczItd2FjLmFwci04MzE1LmVkZ2VjYXN0ZG5zLm5ldCAjIENOQU1FIGZvciAocGJzLnR3aW1nLmNvbSkNCmNzMi13YWMtdXMuODMxNS5lY2Rucy5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczQ1LndhYy5lZGdlY2FzdGNkbi5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczItd2FjLmFwci04MzE1LmVkZ2VjYXN0ZG5zLm5ldCAjIENOQU1FIGZvciAocGJzLnR3aW1nLmNvbSkNCmNzMi13YWMtdXMuODMxNS5lY2Rucy5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQpjczQ1LndhYy5lZGdlY2FzdGNkbi5uZXQgIyBDTkFNRSBmb3IgKHBicy50d2ltZy5jb20pDQoucGZzZW5zZS5vcmcNCi5uZXRnYXRlLmNvbQ0K</suppression>
+				<dnsbl_webpage>dnsbl_default.php</dnsbl_webpage>
+				<pfb_tld>on</pfb_tld>
+				<pfb_control></pfb_control>
+				<pfb_dnsvip_type>ipalias</pfb_dnsvip_type>
+				<pfb_dnsbl_rule>on</pfb_dnsbl_rule>
+				<dnsbl_allow_int>opt1</dnsbl_allow_int>
+				<global_log>enabled</global_log>
+				<pfb_cache>on</pfb_cache>
+				<pfb_dnsbl_sync></pfb_dnsbl_sync>
+				<pfb_py_reply>on</pfb_py_reply>
+				<pfb_hsts>on</pfb_hsts>
+				<pfb_idn></pfb_idn>
+				<pfb_regex></pfb_regex>
+				<pfb_cname></pfb_cname>
+				<pfb_noaaaa></pfb_noaaaa>
+				<pfb_gp></pfb_gp>
+				<pfb_pytld></pfb_pytld>
+				<pfb_pytld_sort></pfb_pytld_sort>
+				<pfb_py_nolog></pfb_py_nolog>
+				<pfb_pytlds_gtld>arpa,arpa,com,net,org,edu</pfb_pytlds_gtld>
+				<pfb_pytlds_cctld></pfb_pytlds_cctld>
+				<pfb_pytlds_itld></pfb_pytlds_itld>
+				<pfb_pytlds_bgtld></pfb_pytlds_bgtld>
+				<action>Disabled</action>
+				<aliaslog>enabled</aliaslog>
+				<autoaddrnot_in></autoaddrnot_in>
+				<autoports_in></autoports_in>
+				<aliasports_in></aliasports_in>
+				<autoaddr_in></autoaddr_in>
+				<autonot_in></autonot_in>
+				<aliasaddr_in></aliasaddr_in>
+				<autoproto_in></autoproto_in>
+				<agateway_in>default</agateway_in>
+				<autoaddrnot_out></autoaddrnot_out>
+				<autoports_out></autoports_out>
+				<aliasports_out></aliasports_out>
+				<autoaddr_out></autoaddr_out>
+				<autonot_out></autonot_out>
+				<aliasaddr_out></aliasaddr_out>
+				<autoproto_out></autoproto_out>
+				<agateway_out>default</agateway_out>
+				<alexa_enable></alexa_enable>
+				<alexa_inclusion>ca,co,com,edu,io,net,org</alexa_inclusion>
+				<pfb_regex_list></pfb_regex_list>
+				<pfb_noaaaa_list></pfb_noaaaa_list>
+				<pfb_gp_bypass_list></pfb_gp_bypass_list>
+				<tldexclusion></tldexclusion>
+				<tldblacklist>YWk=</tldblacklist>
+				<tldwhitelist></tldwhitelist>
+				<alexa_type>tranco</alexa_type>
+				<alexa_count>1000</alexa_count>
+				<pfb_py_block>on</pfb_py_block>
+				<dnsbl_mode>dnsbl_unbound</dnsbl_mode>
+				<dnsbl_interface>lo0</dnsbl_interface>
+			</config>
+		</pfblockerngdnsblsettings>
+		<pfblockerngdnsbl>
+			<config>
+				<aliasname>AI</aliasname>
+				<description></description>
+				<action>unbound</action>
+				<cron>EveryDay</cron>
+				<dow>1</dow>
+				<sort>sort</sort>
+				<srcint></srcint>
+				<script_pre></script_pre>
+				<script_post></script_post>
+				<logging>enabled</logging>
+				<order>default</order>
+				<filter_alexa></filter_alexa>
+				<custom></custom>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-ai.txt</url>
+					<header>AI</header>
+				</row>
+			</config>
+		</pfblockerngdnsbl>
+		<pfblockernglistsv4>
+			<config>
+				<aliasname>PRI1</aliasname>
+				<description><![CDATA[PRI1 - Collection of Feeds from the most reputable blocklist providers. (Primary tier)]]></description>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://feodotracker.abuse.ch/downloads/ipblocklist_recommended.txt</url>
+					<header>Abuse_Feodo_C2</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://sslbl.abuse.ch/blacklist/sslipblacklist.txt</url>
+					<header>Abuse_SSLBL</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://cinsarmy.com/list/ci-badguys.txt</url>
+					<header>CINS_army</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt</url>
+					<header>ET_Block</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://rules.emergingthreats.net/blockrules/compromised-ips.txt</url>
+					<header>ET_Comp</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://isc.sans.edu/block.txt</url>
+					<header>ISC_Block</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://www.spamhaus.org/drop/drop.txt</url>
+					<header>Spamhaus_Drop</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://www.spamhaus.org/drop/edrop.txt</url>
+					<header>Spamhaus_eDrop</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://talosintelligence.com/documents/ip-blacklist</url>
+					<header>Talos_BL</header>
+				</row>
+				<action>Deny_Outbound</action>
+				<cron>01hour</cron>
+				<aliaslog>enabled</aliaslog>
+				<dow>1</dow>
+			</config>
+		</pfblockernglistsv4>
+		<pfblockerngblacklist>
+			<blacklist_enable>Disable</blacklist_enable>
+			<blacklist_lang>EN</blacklist_lang>
+			<blacklist_selected></blacklist_selected>
+			<blacklist_freq>Never</blacklist_freq>
+			<blacklist_logging>enabled</blacklist_logging>
+			<item>
+				<title>Shallalist</title>
+				<xml>shallalist</xml>
+				<feed>http://www.shallalist.de/Downloads/shallalist.tar.gz</feed>
+				<size>10</size>
+				<selected></selected>
+			</item>
+			<item>
+				<title>UT1</title>
+				<xml>ut1</xml>
+				<feed>ftp://ftp.ut-capitole.fr/pub/reseau/cache/squidguard_contrib/blacklists.tar.gz</feed>
+				<size>8.5</size>
+				<selected></selected>
+			</item>
+		</pfblockerngblacklist>
+		<pfblockerngglobal>
+			<uniblock>#FFF9C4</uniblock>
+			<unipermit>#80CBC4</unipermit>
+			<unimatch>#B3E5FC</unimatch>
+			<unidnsbl>#EF9A9A</unidnsbl>
+			<unireply>#E8E8E8</unireply>
+			<uniblock2>#83791D</uniblock2>
+			<unipermit2>#3B8780</unipermit2>
+			<unimatch2>#42809D</unimatch2>
+			<unidnsbl2>#E84E4E</unidnsbl2>
+			<unireply2>#54585E</unireply2>
+			<pfbchart1>#0C6197</pfbchart1>
+			<pfbchart2>#7A7A7A</pfbchart2>
+			<alertrefresh>on</alertrefresh>
+			<pfbpageload>unified</pfbpageload>
+			<pfbmaxtable>1000</pfbmaxtable>
+			<pfbextdns>8.8.8.8</pfbextdns>
+			<pfbreplytypes></pfbreplytypes>
+			<pfbreplyrec></pfbreplyrec>
+			<pfbchartcnt>24</pfbchartcnt>
+			<pfbchartstyle>twotone</pfbchartstyle>
+			<pfbblockstat></pfbblockstat>
+			<pfbpermitstat></pfbpermitstat>
+			<pfbmatchstat></pfbmatchstat>
+			<pfbdnsblstat></pfbdnsblstat>
+			<pfbdnsblreplystat></pfbdnsblreplystat>
+			<pfbunicnt>200</pfbunicnt>
+			<pfbdenycnt>25</pfbdenycnt>
+			<pfbpermitcnt>25</pfbpermitcnt>
+			<pfbmatchcnt>25</pfbmatchcnt>
+			<pfbdnscnt>1</pfbdnscnt>
+			<pfbdnsreplycnt>200</pfbdnsreplycnt>
+			<ipfilterlimitentries>100</ipfilterlimitentries>
+			<dnsblfilterlimitentries>100</dnsblfilterlimitentries>
+			<dnsfilterlimitentries>100</dnsfilterlimitentries>
+		</pfblockerngglobal>
+		<pfblockerngsafesearch></pfblockerngsafesearch>
+		<syslogng>
+			<config>
+				<enable>on</enable>
+				<interfaces>lan</interfaces>
+				<default_protocol>udp</default_protocol>
+				<dca></dca>
+				<certificate>68016aeb9db95</certificate>
+				<default_port>5141</default_port>
+				<default_logdir>/var/syslog-ng</default_logdir>
+				<default_logfile>default.log</default_logfile>
+				<archive_frequency>daily</archive_frequency>
+				<compress_archives>on</compress_archives>
+				<compress_type>gz</compress_type>
+				<max_archives>30</max_archives>
+				<include_scl></include_scl>
+			</config>
+		</syslogng>
+		<syslogngadvanced>
+			<config>
+				<objectname>debug_file</objectname>
+				<objecttype>destination</objecttype>
+				<objectparameters>ew0KZmlsZSgiL3Zhci9sb2cvc3lzbG9nLW5nLWRlYnVnLmxvZyIpOw0KfTs=</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objectname>pfblocker_to_promtail</objectname>
+				<objecttype>destination</objecttype>
+				<objectparameters>ew0KIHN5c2xvZygiMTkyLjE2OC41Ni4xMCIgdHJhbnNwb3J0KHVkcCkgcG9ydCg1MTQwKQ0KIHRlbXBsYXRlKCIke01TR31cbiIpKTsNCn07</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objectname>promtail</objectname>
+				<objecttype>destination</objecttype>
+				<objectparameters>ew0KIHN5c2xvZygiMTkyLjE2OC41Ni4xMCIgdHJhbnNwb3J0KHVkcCkgcG9ydCg1MTQwKQ0KICk7DQp9Ow==</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objecttype>destination</objecttype>
+				<objectname>_DEFAULT</objectname>
+				<objectparameters>eyBmaWxlKCIvdmFyL3N5c2xvZy1uZy9kZWZhdWx0LmxvZyIpOyB9Ow==</objectparameters>
+			</config>
+			<config>
+				<objectname>captiveportal</objectname>
+				<objecttype>log</objecttype>
+				<objectparameters>ew0KIHNvdXJjZShjYXB0aXZlcG9ydGFsKTsNCiAjIGRlc3RpbmF0aW9uKHByb210YWlsKTsNCn07</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objectname>pfblocker</objectname>
+				<objecttype>log</objecttype>
+				<objectparameters>ew0KIHNvdXJjZShwZmJsb2NrZXIpOw0KIGRlc3RpbmF0aW9uKHBmYmxvY2tlcl90b19wcm9tdGFpbCk7DQp9Ow==</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objecttype>log</objecttype>
+				<objectname>_DEFAULT</objectname>
+				<objectparameters>eyBzb3VyY2UoX0RFRkFVTFQpOyBkZXN0aW5hdGlvbihfREVGQVVMVCk7IH07</objectparameters>
+			</config>
+			<config>
+				<objectname>captiveportal</objectname>
+				<objecttype>source</objecttype>
+				<objectparameters>ew0KIGZpbGUoIi92YXIvbG9nL3BvcnRhbGF1dGgubG9nIiBmb2xsb3dfZnJlcSgxKSBmbGFncyhuby1wYXJzZSkpOw0KfTs=</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objectname>pfblocker</objectname>
+				<objecttype>source</objecttype>
+				<objectparameters>ew0KIGZpbGUoIi92YXIvbG9nL3BmYmxvY2tlcm5nL3VuaWZpZWQubG9nIg0KIGZvbGxvdy1mcmVxKDEpDQogcHJvZ3JhbS1vdmVycmlkZSgicGZibG9ja2VyIikNCiBmbGFncyhuby1wYXJzZSkNCiApOw0KfTs=</objectparameters>
+				<description></description>
+			</config>
+			<config>
+				<objecttype>source</objecttype>
+				<objectname>_DEFAULT</objectname>
+				<objectparameters>eyBpbnRlcm5hbCgpOyBzeXNsb2codHJhbnNwb3J0KHVkcCkgcG9ydCg1MTQxKSBpcCgxOTIuMTY4LjU2LjI1NCkpOyB9Ow==</objectparameters>
+			</config>
+		</syslogngadvanced>
 	</installedpackages>
-	<virtualip></virtualip>
+	<virtualip>
+		<vip>
+			<interface>lo0</interface>
+			<descr><![CDATA[pfB DNSBL - DO NOT EDIT]]></descr>
+			<type>single</type>
+			<subnet_bits>32</subnet_bits>
+			<subnet>10.10.10.1</subnet>
+			<mode>ipalias</mode>
+		</vip>
+		<vip>
+			<interface>lo0</interface>
+			<descr><![CDATA[pfB DNSBL - DO NOT EDIT]]></descr>
+			<type>single</type>
+			<subnet_bits>128</subnet_bits>
+			<subnet>::10.10.10.1</subnet>
+			<mode>ipalias</mode>
+		</vip>
+	</virtualip>
 	<dhcrelay></dhcrelay>
 	<dhcrelay6></dhcrelay6>
 	<sysctl></sysctl>
