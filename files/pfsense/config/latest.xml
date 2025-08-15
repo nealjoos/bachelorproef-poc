@@ -28,6 +28,7 @@
 			<scope>local</scope>
 			<gid>2000</gid>
 			<member>2000</member>
+			<member>2002</member>
 			<priv>user-services-captiveportal-login</priv>
 		</group>
 		<user>
@@ -58,17 +59,29 @@
 		</user>
 		<user>
 			<scope>user</scope>
+			<bcrypt-hash>$2y$10$ot.OdfZG0ddzGstWKjEd7OgvsUZQe9WepbvzuUkqdizOGo1o4XkPW</bcrypt-hash>
+			<descr><![CDATA[John Doe]]></descr>
+			<name>john.doe</name>
+			<expires></expires>
+			<dashboardcolumns>2</dashboardcolumns>
+			<authorizedkeys></authorizedkeys>
+			<ipsecpsk></ipsecpsk>
+			<webguicss>pfSense.css</webguicss>
+			<uid>2002</uid>
+		</user>
+		<user>
+			<scope>user</scope>
 			<descr><![CDATA[Neal Joos]]></descr>
-			<name>student</name>
+			<name>neal.joos</name>
 			<expires></expires>
 			<dashboardcolumns>2</dashboardcolumns>
 			<authorizedkeys></authorizedkeys>
 			<ipsecpsk></ipsecpsk>
 			<webguicss>pfSense.css</webguicss>
 			<uid>2000</uid>
-			<bcrypt-hash>$2y$10$cWVn8tFusWMkEEGcYQyctOnc4AG6Mtsyp/G2n.5WJfiY1fzikQgeG</bcrypt-hash>
+			<bcrypt-hash>$2y$10$a8Ju6c0O9SHBk9sfceTMn.lPiojEb4CuTNUrD8PKh0fjulJ2NtiiG</bcrypt-hash>
 		</user>
-		<nextuid>2002</nextuid>
+		<nextuid>2003</nextuid>
 		<nextgid>2001</nextgid>
 		<timeservers>2.pfsense.pool.ntp.org</timeservers>
 		<webgui>
@@ -912,8 +925,8 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1755258863</time>
-		<description><![CDATA[admin@192.168.56.1 (Local Database): Changed system logging options.]]></description>
+		<time>1755265772</time>
+		<description><![CDATA[admin@192.168.56.1 (Local Database): pfBlockerNG: Saved page order format/settings for [ DNSBL Groups ]]]></description>
 		<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 	</revision>
 	<gateways></gateways>
@@ -1178,10 +1191,10 @@
 		</pfblockerngdnsblsettings>
 		<pfblockerngdnsbl>
 			<config>
-				<aliasname>AI</aliasname>
+				<aliasname>Exam_fraud</aliasname>
 				<description></description>
 				<action>unbound</action>
-				<cron>EveryDay</cron>
+				<cron>01hour</cron>
 				<dow>1</dow>
 				<sort>sort</sort>
 				<srcint></srcint>
@@ -1195,7 +1208,19 @@
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
 					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-ai.txt</url>
-					<header>AI</header>
+					<header>AI_tools</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-chat.txt</url>
+					<header>Chat_services</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-drive.txt</url>
+					<header>Drive_services</header>
 				</row>
 			</config>
 		</pfblockerngdnsbl>

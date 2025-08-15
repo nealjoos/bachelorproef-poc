@@ -1,0 +1,462 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time 1"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"pfsense\"}\n|~ \"Zone: .* - (CONNECT|DISCONNECT|ACCEPT): .*\" \n| pattern \"Zone: <zone> - <event>: <user>, <mac>, <ip>\"\n",
+          "hide": false,
+          "queryType": "range",
+          "refId": "B"
+        },
+        {
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"pfsense\"} \n|= \"DNSBL-Full\" \n| pattern \"<source>,<event_time>,<domain>,<ip>,<protocol>,<type>,<engine>,<repeat_domain>,<category>,<action>\"",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Domain violations by user",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "keepTime": true,
+            "replace": true,
+            "source": "labels"
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "ip",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time 1": true,
+              "action": true,
+              "category": false,
+              "detected_level 1": true,
+              "detected_level 2": true,
+              "engine": false,
+              "event": true,
+              "event_time": true,
+              "ip": true,
+              "job 1": true,
+              "job 2": true,
+              "mac": true,
+              "protocol": true,
+              "repeat_domain": true,
+              "service_name 1": true,
+              "service_name 2": true,
+              "source": true,
+              "type": true,
+              "zone": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time 1": 0,
+              "Time 2": 7,
+              "action": 10,
+              "category": 12,
+              "detected_level 1": 2,
+              "detected_level 2": 13,
+              "domain": 11,
+              "engine": 14,
+              "event": 3,
+              "event_time": 15,
+              "ip": 1,
+              "job 1": 4,
+              "job 2": 16,
+              "mac": 5,
+              "protocol": 17,
+              "repeat_domain": 18,
+              "service_name 1": 6,
+              "service_name 2": 19,
+              "source": 20,
+              "type": 21,
+              "user": 8,
+              "zone": 9
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Time"
+          }
+        ]
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"pfsense\"} \n|= \"DNSBL-Full\" \n| pattern \"<source>,<event_time>,<domain>,<ip>,<protocol>,<type>,<engine>,<repeat_domain>,<category>,<action>\"",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Domain violations",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "keepTime": true,
+            "replace": true,
+            "source": "labels"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "action": true,
+              "detected_level": true,
+              "engine": false,
+              "event_time": true,
+              "job": true,
+              "protocol": true,
+              "repeat_domain": true,
+              "service_name": true,
+              "source": true,
+              "type": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "action": 4,
+              "category": 3,
+              "detected_level": 5,
+              "domain": 2,
+              "engine": 6,
+              "event_time": 7,
+              "ip": 1,
+              "job": 8,
+              "protocol": 9,
+              "repeat_domain": 10,
+              "service_name": 11,
+              "source": 12,
+              "type": 13
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 230
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "user"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 148
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Time"
+          }
+        ]
+      },
+      "pluginVersion": "12.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "direction": "backward",
+          "editorMode": "code",
+          "expr": "{job=\"pfsense\"}\n|~ \"Zone: .* - (CONNECT|DISCONNECT|ACCEPT): .*\" \n| pattern \"Zone: <zone> - <event>: <user>, <mac>, <ip>\"\n",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Captive portal actions",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "delimiter": ",",
+            "format": "auto",
+            "keepTime": true,
+            "replace": true,
+            "source": "labels"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "detected_level": true,
+              "job": true,
+              "service_name": true,
+              "zone": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 0,
+              "detected_level": 5,
+              "event": 2,
+              "ip": 3,
+              "job": 6,
+              "mac": 4,
+              "service_name": 7,
+              "user": 1,
+              "zone": 8
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "preload": false,
+  "refresh": "5s",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Tables",
+  "uid": "294f6010-81b5-4781-be00-ac466c06bad2",
+  "version": 11
+}
