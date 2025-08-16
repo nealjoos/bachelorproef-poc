@@ -46,6 +46,24 @@ dnf install --assumeyes \
 
 python3 -m pip install --user ansible paramiko
 
+# Wait for pfSense SSH port to be open
+log "Waiting for pfSense SSH (192.168.56.254:22) to be available..."
+
+for i in {1..30}; do
+  if nc -z -w 1 192.168.56.254 22; then
+    log "pfSense SSH is available."
+    break
+  else
+    log "pfSense SSH not available yet, retrying... ($i)"
+    sleep 5
+  fi
+
+  if [[ $i -eq 30 ]]; then
+    log "Timeout waiting for pfSense SSH. Exiting..."
+    exit 1
+  fi
+done
+
 # Scan for SSH keys
 log "Scanning remote hosts"
 
@@ -69,27 +87,9 @@ log "Running Ansible playbooks"
 ansible-galaxy collection install community.docker --upgrade
 # ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/site.yml"
 
-# Wait for pfSense SSH port to be open
-log "Waiting for pfSense SSH (192.168.56.254:22) to be available..."
-
-for i in {1..30}; do
-  if nc -z -w 1 192.168.56.254 22; then
-    log "pfSense SSH is available."
-    break
-  else
-    log "pfSense SSH not available yet, retrying... ($i)"
-    sleep 5
-  fi
-
-  if [[ $i -eq 30 ]]; then
-    log "Timeout waiting for pfSense SSH. Exiting..."
-    exit 1
-  fi
-done
-
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/pfsense.yml"
 
-ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/ntopng.yml"
+# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/ntopng.yml"
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
 

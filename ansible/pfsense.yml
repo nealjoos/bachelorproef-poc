@@ -4,17 +4,49 @@
   gather_facts: no
   become: yes
   tasks:
+    # pfBlockerNG-devel
+    - name: Check if pfBlockerNG-devel is installed
+      shell: "pkg info -e pfSense-pkg-pfBlockerNG-devel"
+      register: pfblocker_installed
+      ignore_errors: true
+
+    - name: Install pfBlockerNG-devel if missing
+      shell: "pfSsh.php playback installpkg pfBlockerNG-devel"
+      when: pfblocker_installed.rc != 0
+
+    # syslog-ng
+    - name: Check if syslog-ng is installed
+      shell: "pkg info -e syslog-ng"
+      register: syslog_installed
+      ignore_errors: true
+
+    - name: Install syslog-ng if missing
+      shell: "pfSsh.php playback installpkg syslog-ng"
+      when: syslog_installed.rc != 0
+
+    # telegraf
+    - name: Check if telegraf is installed
+      shell: "pkg info -e telegraf"
+      register: telegraf_installed
+      ignore_errors: true
+
+    - name: Remove telegraf if installed
+      shell: "pkg delete -y telegraf"
+      when: telegraf_installed.rc == 0
+
     - name: Copy files to pfSense
       copy:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: "{{ item.mode }}"
       with_items: "{{ files }}"
+      register: copy_result
 
-    - name: Reboot pfSense
+    - name: Reboot pfSense if config changed
       shell: /sbin/reboot
       async: 1
       poll: 0
+      when: copy_result.changed
       ignore_errors: true
 
     - name: End play gracefully after reboot
