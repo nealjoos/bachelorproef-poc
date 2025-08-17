@@ -3,17 +3,6 @@ files:
   - { src: "/vagrant/files/docker/loki/docker-compose.yml", dest: "/opt/loki", mode: "0644" }
   - { src: "/vagrant/files/docker/loki/promtail-config.yml", dest: "/opt/loki", mode: "0644" }
 
-# Adguard variables
-adguard_container_name: adguardhome
-adguard_image: adguard/adguardhome:latest
-adguard_config_dir: /opt/adguardhome/config
-adguard_work_dir: /opt/adguardhome/work
-adguard_ports:
-  - "53:53/udp"
-  - "80:80"
-  - "443:443"
-  - "3000:3000"  # Web UI for first-time config
-
 # Loki variables
 loki_dir: /opt/loki
 compose_file: docker-compose.yml
