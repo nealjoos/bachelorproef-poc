@@ -25,15 +25,6 @@
     - type: private_network
       ip: 192.168.57.2
 
-- name: ntopng
-  memory: 2048
-  cpus: 2
-  networks:
-    - type: private_network
-      ip: 192.168.56.11
-    - type: private_network
-      ip: 192.168.60.253
-
 - name: student
   box: gusztavvargadr/xubuntu-desktop-2404-lts
   memory: 2048

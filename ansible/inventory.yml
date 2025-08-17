@@ -7,9 +7,6 @@ servers:
     docker:
       ansible_host: 192.168.56.10
       ansible_ssh_private_key_file: /vagrant/.vagrant/machines/docker/virtualbox/private_key
-    ntopng:
-      ansible_host: 192.168.56.11
-      ansible_ssh_private_key_file: /vagrant/.vagrant/machines/ntopng/virtualbox/private_key
 
 routers:
   hosts:

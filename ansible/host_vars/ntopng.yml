@@ -1,6 +1,0 @@
----
-files:
-  - { src: "/vagrant/files/ntopng/blacklists/ai.list", dest: "/usr/share/ntopng/httpdocs/misc/lists/custom/ai.list", mode: "0644" }
-  - { src: "/vagrant/files/ntopng/blacklists/chat.list", dest: "/usr/share/ntopng/httpdocs/misc/lists/custom/chat.list", mode: "0644" }
-  - { src: "/vagrant/files/ntopng/blacklists/drive.list", dest: "/usr//share/ntopng/httpdocs/misc/lists/custom/drive.list", mode: "0644" }
-  - { src: "/vagrant/files/ntopng/blacklists/misc.list", dest: "/usr//share/ntopng/httpdocs/misc/lists/custom/misc.list", mode: "0644" }
