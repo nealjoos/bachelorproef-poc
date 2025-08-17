@@ -340,7 +340,7 @@
 				<address>pfB_DNSBL_VIPs</address>
 			</destination>
 			<created>
-				<time>1755195274</time>
+				<time>1755435285</time>
 				<username><![CDATA[Auto]]></username>
 			</created>
 		</rule>
@@ -362,27 +362,45 @@
 				<port>pfB_DNSBL_Ports</port>
 			</destination>
 			<created>
-				<time>1755195274</time>
+				<time>1755435285</time>
 				<username><![CDATA[Auto]]></username>
 			</created>
 		</rule>
 		<rule>
 			<ipprotocol>inet</ipprotocol>
 			<type>reject</type>
-			<descr><![CDATA[pfB_PRI1_v4]]></descr>
+			<descr><![CDATA[pfB_Exam_fraud_v4]]></descr>
 			<source>
 				<any></any>
 			</source>
 			<destination>
-				<address>pfB_PRI1_v4</address>
+				<address>pfB_Exam_fraud_v4</address>
 			</destination>
 			<log></log>
 			<created>
-				<time>1755195274</time>
+				<time>1755435285</time>
 				<username><![CDATA[Auto]]></username>
 			</created>
 			<interface>opt1</interface>
-			<tracker>1770008827</tracker>
+			<tracker>1770009290</tracker>
+		</rule>
+		<rule>
+			<ipprotocol>inet6</ipprotocol>
+			<type>reject</type>
+			<descr><![CDATA[pfB_Exam_fraud_v6]]></descr>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_Exam_fraud_v6</address>
+			</destination>
+			<log></log>
+			<created>
+				<time>1755435285</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+			<interface>opt1</interface>
+			<tracker>1770009186</tracker>
 		</rule>
 		<rule>
 			<type>pass</type>
@@ -720,11 +738,20 @@
 	</ipsec>
 	<aliases>
 		<alias>
-			<name>pfB_PRI1_v4</name>
-			<url>https://127.0.0.1:443/pfblockerng/pfblockerng.php?pfb=pfB_PRI1_v4</url>
+			<name>pfB_Exam_fraud_v4</name>
+			<url>https://127.0.0.1:443/pfblockerng/pfblockerng.php?pfb=pfB_Exam_fraud_v4</url>
 			<updatefreq>32</updatefreq>
 			<address></address>
-			<descr><![CDATA[pfBlockerNG  Auto  Alias [ Abuse_Feodo_C2_v4,Abuse_SSLBL_v4,CINS_army_v4,ET_Block_v4,ET_Comp_v4,ISC_Block_v4,Spamhaus_Drop_v4,Spamhaus_eDrop_v4,Talos_BL_v4, ]]]></descr>
+			<descr><![CDATA[pfBlockerNG  Auto  Alias [ Discord_ipv4_v4,Meta_ipv4_v4, ]]]></descr>
+			<type>urltable</type>
+			<detail><![CDATA[DO NOT EDIT THIS ALIAS]]></detail>
+		</alias>
+		<alias>
+			<name>pfB_Exam_fraud_v6</name>
+			<url>https://127.0.0.1:443/pfblockerng/pfblockerng.php?pfb=pfB_Exam_fraud_v6</url>
+			<updatefreq>32</updatefreq>
+			<address></address>
+			<descr><![CDATA[pfBlockerNG  Auto  Alias [ Discord_ipv6_v6,Meta_ipv6_v6, ]]]></descr>
 			<type>urltable</type>
 			<detail><![CDATA[DO NOT EDIT THIS ALIAS]]></detail>
 		</alias>
@@ -860,15 +887,6 @@
 		</item>
 		<item>
 			<minute>0</minute>
-			<hour>18</hour>
-			<mday>*</mday>
-			<month>*</month>
-			<wday>*</wday>
-			<who>root</who>
-			<command>/usr/local/bin/php /usr/local/www/pfblockerng/pfblockerng.php dcc &gt;&gt; /var/log/pfblockerng/extras.log 2&gt;&amp;1</command>
-		</item>
-		<item>
-			<minute>0</minute>
 			<hour>*</hour>
 			<mday>*</mday>
 			<month>*</month>
@@ -925,8 +943,8 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1755265772</time>
-		<description><![CDATA[admin@192.168.56.1 (Local Database): pfBlockerNG: Saved page order format/settings for [ DNSBL Groups ]]]></description>
+		<time>1755438359</time>
+		<description><![CDATA[admin@192.168.56.1 (Local Database): pfBlockerNG: Saved [ Type:IPv6, Name:Exam_fraud ] configuration]]></description>
 		<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 	</revision>
 	<gateways></gateways>
@@ -1207,85 +1225,85 @@
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-ai.txt</url>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/dns/ai.txt</url>
 					<header>AI_tools</header>
 				</row>
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-chat.txt</url>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/dns/chat.txt</url>
 					<header>Chat_services</header>
 				</row>
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/blacklists/hosts-drive.txt</url>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/dns/drive.txt</url>
 					<header>Drive_services</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/dns/forum.txt</url>
+					<header>Forum_services</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/dns/mail.txt</url>
+					<header>Mail_services</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Disabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/dns/misc.txt</url>
+					<header>Misc_services</header>
 				</row>
 			</config>
 		</pfblockerngdnsbl>
 		<pfblockernglistsv4>
 			<config>
-				<aliasname>PRI1</aliasname>
-				<description><![CDATA[PRI1 - Collection of Feeds from the most reputable blocklist providers. (Primary tier)]]></description>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://feodotracker.abuse.ch/downloads/ipblocklist_recommended.txt</url>
-					<header>Abuse_Feodo_C2</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://sslbl.abuse.ch/blacklist/sslipblacklist.txt</url>
-					<header>Abuse_SSLBL</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://cinsarmy.com/list/ci-badguys.txt</url>
-					<header>CINS_army</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt</url>
-					<header>ET_Block</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://rules.emergingthreats.net/blockrules/compromised-ips.txt</url>
-					<header>ET_Comp</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://isc.sans.edu/block.txt</url>
-					<header>ISC_Block</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://www.spamhaus.org/drop/drop.txt</url>
-					<header>Spamhaus_Drop</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://www.spamhaus.org/drop/edrop.txt</url>
-					<header>Spamhaus_eDrop</header>
-				</row>
-				<row>
-					<format>auto</format>
-					<state><![CDATA[Enabled]]></state>
-					<url>https://talosintelligence.com/documents/ip-blacklist</url>
-					<header>Talos_BL</header>
-				</row>
+				<aliasname>Exam_fraud</aliasname>
+				<description></description>
 				<action>Deny_Outbound</action>
-				<cron>01hour</cron>
-				<aliaslog>enabled</aliaslog>
+				<cron>06hours</cron>
 				<dow>1</dow>
+				<sort>sort</sort>
+				<srcint></srcint>
+				<script_pre></script_pre>
+				<script_post></script_post>
+				<aliaslog>enabled</aliaslog>
+				<stateremoval><![CDATA[enabled]]></stateremoval>
+				<autoaddrnot_in></autoaddrnot_in>
+				<autoports_in></autoports_in>
+				<aliasports_in></aliasports_in>
+				<autoaddr_in></autoaddr_in>
+				<autonot_in></autonot_in>
+				<aliasaddr_in></aliasaddr_in>
+				<autoproto_in></autoproto_in>
+				<agateway_in>default</agateway_in>
+				<autoaddrnot_out></autoaddrnot_out>
+				<autoports_out></autoports_out>
+				<aliasports_out></aliasports_out>
+				<autoaddr_out></autoaddr_out>
+				<autonot_out></autonot_out>
+				<aliasaddr_out></aliasaddr_out>
+				<autoproto_out></autoproto_out>
+				<agateway_out>default</agateway_out>
+				<suppression_cidr>Disabled</suppression_cidr>
+				<whois_convert></whois_convert>
+				<custom></custom>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blockslists/ip/AS54113_ipv4.txt</url>
+					<header>Discord_ipv4</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blockslists/ip/AS32934_ipv4.txt</url>
+					<header>Meta_ipv4</header>
+				</row>
 			</config>
 		</pfblockernglistsv4>
 		<pfblockerngblacklist>
@@ -1422,6 +1440,52 @@
 				<objectparameters>eyBpbnRlcm5hbCgpOyBzeXNsb2codHJhbnNwb3J0KHVkcCkgcG9ydCg1MTQxKSBpcCgxOTIuMTY4LjU2LjI1NCkpOyB9Ow==</objectparameters>
 			</config>
 		</syslogngadvanced>
+		<pfblockernglistsv6>
+			<config>
+				<aliasname>Exam_fraud</aliasname>
+				<description></description>
+				<action>Deny_Outbound</action>
+				<cron>06hours</cron>
+				<dow>1</dow>
+				<sort>sort</sort>
+				<srcint></srcint>
+				<script_pre></script_pre>
+				<script_post></script_post>
+				<aliaslog>enabled</aliaslog>
+				<stateremoval><![CDATA[enabled]]></stateremoval>
+				<autoaddrnot_in></autoaddrnot_in>
+				<autoports_in></autoports_in>
+				<aliasports_in></aliasports_in>
+				<autoaddr_in></autoaddr_in>
+				<autonot_in></autonot_in>
+				<aliasaddr_in></aliasaddr_in>
+				<autoproto_in></autoproto_in>
+				<agateway_in>default</agateway_in>
+				<autoaddrnot_out></autoaddrnot_out>
+				<autoports_out></autoports_out>
+				<aliasports_out></aliasports_out>
+				<autoaddr_out></autoaddr_out>
+				<autonot_out></autonot_out>
+				<aliasaddr_out></aliasaddr_out>
+				<autoproto_out></autoproto_out>
+				<agateway_out>default</agateway_out>
+				<suppression_cidr>Disabled</suppression_cidr>
+				<whois_convert></whois_convert>
+				<custom></custom>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://github.com/nealjoos/bachelorproef-poc/blob/main/files/pfsense/blockslists/ip/AS54113_ipv6.txt</url>
+					<header>Discord_ipv6</header>
+				</row>
+				<row>
+					<format>auto</format>
+					<state><![CDATA[Enabled]]></state>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blockslists/ip/AS32934_ipv6.txt</url>
+					<header>Meta_ipv6</header>
+				</row>
+			</config>
+		</pfblockernglistsv6>
 	</installedpackages>
 	<virtualip>
 		<vip>

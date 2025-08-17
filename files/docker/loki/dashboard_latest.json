@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -90,7 +90,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "12.1.1",
+      "pluginVersion": "12.2.0-16979757807",
       "targets": [
         {
           "datasource": {
@@ -99,7 +99,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "{job=\"pfsense\"}\n|~ \"Zone: .* - (CONNECT|DISCONNECT|ACCEPT): .*\" \n| pattern \"Zone: <zone> - <event>: <user>, <mac>, <ip>\"\n",
+          "expr": "{job=\"pfsense\"}\n|~ \"Zone: .* - (ACCEPT|DISCONNECT): .*\" \n| pattern \"Zone: <zone> - <event>: <user>, <mac>, <ip>\"",
           "hide": false,
           "queryType": "range",
           "refId": "B"
@@ -128,6 +128,24 @@
           "options": {
             "byField": "ip",
             "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "substring",
+                  "options": {
+                    "value": "-"
+                  }
+                },
+                "fieldName": "action"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
           }
         },
         {
@@ -244,7 +262,7 @@
           }
         ]
       },
-      "pluginVersion": "12.1.1",
+      "pluginVersion": "12.2.0-16979757807",
       "targets": [
         {
           "direction": "backward",
@@ -389,7 +407,7 @@
           }
         ]
       },
-      "pluginVersion": "12.1.1",
+      "pluginVersion": "12.2.0-16979757807",
       "targets": [
         {
           "datasource": {
@@ -458,5 +476,5 @@
   "timezone": "browser",
   "title": "Tables",
   "uid": "294f6010-81b5-4781-be00-ac466c06bad2",
-  "version": 11
+  "version": 1
 }

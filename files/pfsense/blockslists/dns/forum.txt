@@ -1,0 +1,33 @@
+# Major Q&A sites
+stackoverflow.com
+stackexchange.com
+superuser.com
+askubuntu.com
+serverfault.com
+math.stackexchange.com
+tex.stackexchange.com
+askdifferent.com
+unix.stackexchange.com
+softwareengineering.stackexchange.com
+datascience.stackexchange.com
+crossvalidated.com
+physics.stackexchange.com
+cs.stackexchange.com
+security.stackexchange.com
+
+# Other popular Q&A / developer sites
+quora.com
+reddit.com
+
+# Developer forums / communities
+dev.to
+coderanch.com
+codeproject.com
+codenewbie.org
+github.community
+forums.asp.net
+daniweb.com
+programmers.stackexchange.com
+linuxquestions.org
+ubuntuforums.org
+tomshardware.com
