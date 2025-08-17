@@ -89,8 +89,6 @@ ansible-galaxy collection install community.docker --upgrade
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/pfsense.yml"
 
-# ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/ntopng.yml"
-
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/docker.yml"
 
 ansible-playbook -i "$SRC_DIR/ansible/inventory.yml" "$SRC_DIR/ansible/loki.yml"
