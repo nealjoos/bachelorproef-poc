@@ -11,9 +11,6 @@
     - type: private_network
       ip: 192.168.61.254
       netmask: 255.255.254.0
-    # LOGGING
-    - type: private_network
-      ip: 192.168.57.3
   disable_default_vagrant: true
 
 - name: docker
@@ -22,8 +19,6 @@
   networks:
     - type: private_network
       ip: 192.168.56.10
-    - type: private_network
-      ip: 192.168.57.2
 
 - name: student
   box: gusztavvargadr/xubuntu-desktop-2404-lts
