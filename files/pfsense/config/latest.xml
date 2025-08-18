@@ -340,7 +340,7 @@
 				<address>pfB_DNSBL_VIPs</address>
 			</destination>
 			<created>
-				<time>1755435285</time>
+				<time>1755526227</time>
 				<username><![CDATA[Auto]]></username>
 			</created>
 		</rule>
@@ -362,45 +362,9 @@
 				<port>pfB_DNSBL_Ports</port>
 			</destination>
 			<created>
-				<time>1755435285</time>
+				<time>1755526227</time>
 				<username><![CDATA[Auto]]></username>
 			</created>
-		</rule>
-		<rule>
-			<ipprotocol>inet</ipprotocol>
-			<type>reject</type>
-			<descr><![CDATA[pfB_Exam_fraud_v4]]></descr>
-			<source>
-				<any></any>
-			</source>
-			<destination>
-				<address>pfB_Exam_fraud_v4</address>
-			</destination>
-			<log></log>
-			<created>
-				<time>1755435285</time>
-				<username><![CDATA[Auto]]></username>
-			</created>
-			<interface>opt1</interface>
-			<tracker>1770009290</tracker>
-		</rule>
-		<rule>
-			<ipprotocol>inet6</ipprotocol>
-			<type>reject</type>
-			<descr><![CDATA[pfB_Exam_fraud_v6]]></descr>
-			<source>
-				<any></any>
-			</source>
-			<destination>
-				<address>pfB_Exam_fraud_v6</address>
-			</destination>
-			<log></log>
-			<created>
-				<time>1755435285</time>
-				<username><![CDATA[Auto]]></username>
-			</created>
-			<interface>opt1</interface>
-			<tracker>1770009186</tracker>
 		</rule>
 		<rule>
 			<type>pass</type>
@@ -427,6 +391,42 @@
 			<destination>
 				<any></any>
 			</destination>
+		</rule>
+		<rule>
+			<ipprotocol>inet</ipprotocol>
+			<type>reject</type>
+			<descr><![CDATA[pfB_Exam_fraud_v4]]></descr>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_Exam_fraud_v4</address>
+			</destination>
+			<log></log>
+			<created>
+				<time>1755526227</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+			<interface>opt1</interface>
+			<tracker>1770009290</tracker>
+		</rule>
+		<rule>
+			<ipprotocol>inet6</ipprotocol>
+			<type>reject</type>
+			<descr><![CDATA[pfB_Exam_fraud_v6]]></descr>
+			<source>
+				<any></any>
+			</source>
+			<destination>
+				<address>pfB_Exam_fraud_v6</address>
+			</destination>
+			<log></log>
+			<created>
+				<time>1755526227</time>
+				<username><![CDATA[Auto]]></username>
+			</created>
+			<interface>opt1</interface>
+			<tracker>1770009186</tracker>
 		</rule>
 		<rule>
 			<id></id>
@@ -531,7 +531,7 @@
 			<tracker>1744968188</tracker>
 			<type>pass</type>
 			<interface>opt1</interface>
-			<ipprotocol>inet</ipprotocol>
+			<ipprotocol>inet46</ipprotocol>
 			<tag></tag>
 			<tagged></tagged>
 			<max></max>
@@ -555,7 +555,7 @@
 				<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 			</created>
 			<updated>
-				<time>1744968242</time>
+				<time>1755529024</time>
 				<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 			</updated>
 		</rule>
@@ -732,7 +732,8 @@
 			<opt1></opt1>
 		</separator>
 	</filter>
-	<shaper></shaper>
+	<shaper>
+	</shaper>
 	<ipsec>
 		<client></client>
 	</ipsec>
@@ -905,7 +906,8 @@
 		<period>10</period>
 	</widgets>
 	<openvpn></openvpn>
-	<dnshaper></dnshaper>
+	<dnshaper>
+	</dnshaper>
 	<unbound>
 		<enable></enable>
 		<active_interface>all</active_interface>
@@ -943,11 +945,12 @@
 	<vlans></vlans>
 	<qinqs></qinqs>
 	<revision>
-		<time>1755438359</time>
-		<description><![CDATA[admin@192.168.56.1 (Local Database): pfBlockerNG: Saved [ Type:IPv6, Name:Exam_fraud ] configuration]]></description>
+		<time>1755529024</time>
+		<description><![CDATA[admin@192.168.56.1 (Local Database): Firewall: Rules - saved/edited a firewall rule.]]></description>
 		<username><![CDATA[admin@192.168.56.1 (Local Database)]]></username>
 	</revision>
-	<gateways></gateways>
+	<gateways>
+	</gateways>
 	<captiveportal>
 		<students>
 			<zone>STUDENTS</zone>
@@ -1295,13 +1298,13 @@
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blockslists/ip/AS54113_ipv4.txt</url>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/ip/AS54113_ipv4.txt</url>
 					<header>Discord_ipv4</header>
 				</row>
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blockslists/ip/AS32934_ipv4.txt</url>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/ip/AS32934_ipv4.txt</url>
 					<header>Meta_ipv4</header>
 				</row>
 			</config>
@@ -1475,13 +1478,13 @@
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://github.com/nealjoos/bachelorproef-poc/blob/main/files/pfsense/blockslists/ip/AS54113_ipv6.txt</url>
+					<url>https://github.com/nealjoos/bachelorproef-poc/blob/main/files/pfsense/blocklists/ip/AS54113_ipv6.txt</url>
 					<header>Discord_ipv6</header>
 				</row>
 				<row>
 					<format>auto</format>
 					<state><![CDATA[Enabled]]></state>
-					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blockslists/ip/AS32934_ipv6.txt</url>
+					<url>https://raw.githubusercontent.com/nealjoos/bachelorproef-poc/refs/heads/main/files/pfsense/blocklists/ip/AS32934_ipv6.txt</url>
 					<header>Meta_ipv6</header>
 				</row>
 			</config>
